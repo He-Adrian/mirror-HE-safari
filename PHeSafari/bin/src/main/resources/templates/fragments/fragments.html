@@ -2,7 +2,7 @@
 
 <!--  *************** fragment du header *************** -->
 <head th:fragment="header">
-<title>HE-SAFARI</title>
+<title>Spring Boot Thymeleaf - ToDo list</title>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
 
 <link rel="stylesheet" type="text/css"
@@ -21,29 +21,36 @@
 <!--  *************** fragment de navigation *************** -->
 <div th:fragment="navigation">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand" href="#">HE-SAFARI</a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Login</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" href="#">Logout</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link disabled" href="#">My profil</a>
-	      </li>
-	    </ul>
-	  </div>
+		<a class="navbar-brand" href="/">Accueil</a>
+		<button class="navbar-toggler" type="button" data-toggle="dropdown"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+ <ul class="navbar-nav mr-auto">
+		<li class="dropdown">
+			<button class="btn btn-secondary dropdown-toggle" type="button"
+				id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true"
+				aria-expanded="false">Dropdown menu</button>
+			<div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+				<a class="dropdown-item" href="/form">Ajouter une tâche</a> 
+				<a class="dropdown-item" href="/">Liste des tâches</a>
+				<div class="dropdown-divider"></div>			
+			</div>
+		</li>
+		</ul>
+		
+						<!-- FORM USED TO SEARCH A TODO BY THE SELECTED DATE -->
+		<form class="form-inline my-2 my-lg-0" th:object="${todo}" th:action="@{/todoByDate}" method="get">
+	      <input class="form-control mr-sm-2" name="selectedDate" type="date">
+	      <input type="submit" class="btn btn-outline-success my-2 my-sm-0 mt-1" value="Rechercher par date"/>
+	    </form>
 	</nav>
+
 </div>
+
 
 <!--  *************** fragment js *************** -->
 <div th:fragment="scripts">
