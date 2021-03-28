@@ -1,0 +1,30 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Insert header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body>
+	<!-- Replace fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+	<!-- Template from https://bbbootstrap.com/snippets/simple-todo-list-template-11821916 -->
+	<!--For Page-->
+	<div class="page">
+		<h1>Login</h1>
+		<form name='f' action="login" method='POST'>
+			<table>
+				<tr>
+					<td>User:</td>
+					<td><input type='text' name='username' value=''></td>
+				</tr>
+				<tr>
+					<td>Password:</td>
+					<td><input type='password' name='password' /></td>
+				</tr>
+				<tr>
+					<td><input name="submit" type="submit" value="submit" /></td>
+				</tr>
+			</table>
+		</form>
+	</div>
+</body>
+</html>
