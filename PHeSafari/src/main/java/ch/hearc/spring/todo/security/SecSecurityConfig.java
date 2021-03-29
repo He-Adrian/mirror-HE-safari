@@ -1,4 +1,4 @@
-package ch.hearc.spring.todo;
+package ch.hearc.spring.todo.security;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -50,11 +50,6 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
 //          .logoutSuccessUrl("/");
           // ...
     }
-
-	@Bean
-	public AuthenticationFailureHandler authenticationFailureHandler() {
-		return new CustomAuthenticationFailureHandler();
-	}
 
 	@Bean
 	public PasswordEncoder passwordEncoder() {
