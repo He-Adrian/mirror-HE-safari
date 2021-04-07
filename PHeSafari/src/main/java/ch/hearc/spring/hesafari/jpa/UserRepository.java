@@ -1,4 +1,4 @@
-package ch.hearc.spring.hesafari;
+package ch.hearc.spring.hesafari.jpa;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

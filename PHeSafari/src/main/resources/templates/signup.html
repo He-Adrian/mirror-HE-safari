@@ -11,16 +11,21 @@
 	<div class="page">
 		<div class="container">
 			<h1>Signup</h1>
-			<form name='f' action="login" method='POST'>
+			<form name='f' th:action="@{/user/process_signup}" th:object="${user}" method='POST'>
 				<div class="form-group">
 					<label for="username">Username</label> <input type="text"
 						class="form-control" id="username" name='username'
-						placeholder="Enter username">
+						placeholder="Enter username" th:field="*{username}" required>
+				</div>
+				<div class="form-group">
+					<label for="username">Class name</label> <input type="text"
+						class="form-control" id="username" name='username'
+						placeholder="Enter your class name" th:field="*{className}" required>
 				</div>
 				<div class="form-group">
 					<label for="password">Password</label> <input type="password"
 						class="form-control" name='password' id="password"
-						placeholder="Password">
+						placeholder="Password" th:field="*{password}" required>
 				</div>
 				<div class="form-group">
 					<label for="password">Confirm

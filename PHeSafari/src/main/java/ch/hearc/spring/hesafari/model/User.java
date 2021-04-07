@@ -21,13 +21,13 @@ public class User {
 	private String password;
     
     @Column(name = "role", nullable = false, length = 20)
-	private String role;
+	private String role = "User";
     
     @Column(name = "className", nullable = false, length = 20)
 	private String className;
     
     @Column(name = "reputation", nullable = false, length = 20)
-	private int reputation;
+	private int reputation = 0;
 
 	/**
 	 * Default Constructor
