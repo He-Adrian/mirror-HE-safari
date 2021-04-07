@@ -10,7 +10,7 @@
 	<!--For Page-->
 	<div class="page">
 		<div class="container">
-			<h1>Login</h1>
+			<h1>Signup</h1>
 			<form name='f' action="login" method='POST'>
 				<div class="form-group">
 					<label for="username">Email address</label> <input type="text"
@@ -22,12 +22,16 @@
 						class="form-control" name='password' id="password"
 						placeholder="Password">
 				</div>
-				<div class="d-flex justify-content-center links">
-					Don't have an account ? <a href="/signup"> Sign Up</a>
+				<div class="form-group">
+					<label for="password" class="col-form-label-lg">Confirm
+						your password</label> <input id="confirm_password" type="password"
+						name="password" class="form-control form-control-lg"
+						placeholder="Confirm password" required>
 				</div>
 				<button type="submit" class="btn btn-primary">Submit</button>
 			</form>
 		</div>
 	</div>
+	<script src="js/signup.js"></script>
 </body>
 </html>

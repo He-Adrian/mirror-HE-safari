@@ -34,6 +34,7 @@ public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
           .antMatchers("/admin/**").hasRole("ADMIN")
           .antMatchers("/anonymous*").anonymous()
           .antMatchers("/login*").permitAll()
+          .antMatchers("/signup*").permitAll()
           .antMatchers("/").permitAll()
           .antMatchers("/images/**").permitAll()
           .anyRequest().authenticated()

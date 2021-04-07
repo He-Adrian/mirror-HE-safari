@@ -38,8 +38,6 @@ public class BreakController {
 	// Retrieve home.title from application.properties.
 	@Value("${home.title:Default title}")
 	private String homeTitle;
-
-	
 	
 	//**********//
 	// MAPPINGS //
@@ -49,7 +47,7 @@ public class BreakController {
 	 * Select the home view to render by returning its name
 	 * @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	 */
-	@GetMapping("/")
+	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
 	public String home(Map<String, Object> model) {
 		
 		// Send title retrieved from application.properties
@@ -66,12 +64,6 @@ public class BreakController {
 		// Return the page "home.html"
 		return "home";
 	}
-	
-	@RequestMapping(value = "/login", method = {RequestMethod.GET, RequestMethod.POST})
-	public String login(Map<String, Object> model) {
-		return "login";
-	}
-	
 	
 	/**
 	 * Return the page that display todo for the selected date
