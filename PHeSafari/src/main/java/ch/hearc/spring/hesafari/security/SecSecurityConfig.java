@@ -1,4 +1,4 @@
-package ch.hearc.spring.todo.security;
+package ch.hearc.spring.hesafari.security;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

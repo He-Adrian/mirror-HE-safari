@@ -1,4 +1,4 @@
-package ch.hearc.spring.todo.model;
+package ch.hearc.spring.hesafari.model;
 
 public class Break {
 

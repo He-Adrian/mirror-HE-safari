@@ -1,4 +1,4 @@
-package ch.hearc.spring.todo.model;
+package ch.hearc.spring.hesafari.model;
 
 import java.util.Date;
 import org.springframework.format.annotation.DateTimeFormat;

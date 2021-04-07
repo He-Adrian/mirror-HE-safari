@@ -1,16 +1,32 @@
-package ch.hearc.spring.todo.model;
+package ch.hearc.spring.hesafari.model;
 
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
+import javax.persistence.*;
+
+@Entity
+@Table(name = "users")
 public class User {
 	/// Attributes
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
 	private int userID;
+    
+    @Column(name = "username", nullable = false, length = 20)
 	private String username;
+    
+    @Column(nullable = false, length = 64)
 	private String password;
+    
+    @Column(name = "role", nullable = false, length = 20)
 	private String role;
+    
+    @Column(name = "className", nullable = false, length = 20)
 	private String className;
+    
+    @Column(name = "reputation", nullable = false, length = 20)
 	private int reputation;
 
 	/**

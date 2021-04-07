@@ -1,4 +1,4 @@
-package ch.hearc.spring.todo.model;
+package ch.hearc.spring.hesafari.model;
 
 /**
  * Enum that defines a priority for the todo

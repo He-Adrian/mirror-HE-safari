@@ -1,4 +1,4 @@
-package ch.hearc.spring.todo.data;
+package ch.hearc.spring.hesafari.data;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -11,9 +11,9 @@ import java.util.Map;
 import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
-import ch.hearc.spring.todo.model.Break;
-import ch.hearc.spring.todo.model.Todo;
-import ch.hearc.spring.todo.model.TodoPriority;
+import ch.hearc.spring.hesafari.model.Break;
+import ch.hearc.spring.hesafari.model.Todo;
+import ch.hearc.spring.hesafari.model.TodoPriority;
 
 /**
  * DAO = Data Access Object Used to have an access to model entities

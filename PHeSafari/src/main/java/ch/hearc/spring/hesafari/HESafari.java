@@ -1,4 +1,4 @@
-package ch.hearc.spring.todo;
+package ch.hearc.spring.hesafari;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

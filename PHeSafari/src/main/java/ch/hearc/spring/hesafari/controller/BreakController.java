@@ -1,4 +1,4 @@
-package ch.hearc.spring.todo.controller;
+package ch.hearc.spring.hesafari.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -19,9 +19,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ch.hearc.spring.todo.data.BreakDAO;
-import ch.hearc.spring.todo.model.Break;
-import ch.hearc.spring.todo.model.Todo;
+import ch.hearc.spring.hesafari.data.BreakDAO;
+import ch.hearc.spring.hesafari.model.Break;
+import ch.hearc.spring.hesafari.model.Todo;
 
 /**
  * 

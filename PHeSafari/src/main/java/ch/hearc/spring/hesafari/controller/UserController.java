@@ -1,4 +1,4 @@
-package ch.hearc.spring.todo.controller;
+package ch.hearc.spring.hesafari.controller;
 
 import java.util.Map;
 
