@@ -13,9 +13,9 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 
 @Configuration
 @EnableWebSecurity
-public class SecSecurityConfig extends WebSecurityConfigurerAdapter {
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	public SecSecurityConfig() {
+	public WebSecurityConfig() {
 		super();
 	}
 
