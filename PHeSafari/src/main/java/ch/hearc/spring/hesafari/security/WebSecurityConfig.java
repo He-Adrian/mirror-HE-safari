@@ -1,12 +1,18 @@
 package ch.hearc.spring.hesafari.security;
 
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+
+import javax.sql.DataSource;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.ImportResource;
+import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -15,46 +21,44 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 @EnableWebSecurity
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
-	public WebSecurityConfig() {
-		super();
+    @Autowired
+    private DataSource dataSource;
+    
+	@Bean
+	public UserDetailsService userDetailsService() {
+		return new CustomUserDetailsService();
+	}
+	
+	@Bean
+	public BCryptPasswordEncoder passwordEncoder() {
+		return new BCryptPasswordEncoder();
+	}
+
+	@Bean
+	public DaoAuthenticationProvider authenticationProvider() {
+		DaoAuthenticationProvider authProvider = new DaoAuthenticationProvider();
+		authProvider.setUserDetailsService(userDetailsService());
+		authProvider.setPasswordEncoder(passwordEncoder());
+
+		return authProvider;
 	}
 
 	@Override
 	protected void configure(final AuthenticationManagerBuilder auth) throws Exception {
-		auth.inMemoryAuthentication().withUser("user1").password(passwordEncoder().encode("user1Pass")).roles("USER")
-				.and().withUser("user2").password(passwordEncoder().encode("user2Pass")).roles("USER").and()
-				.withUser("admin").password(passwordEncoder().encode("adminPass")).roles("ADMIN");
+		auth.authenticationProvider(authenticationProvider());
 	}
 
 	@Override
-    protected void configure(final HttpSecurity http) throws Exception {
-        http
-          .csrf().disable()
-          .authorizeRequests()
-          .antMatchers("/admin/**").hasRole("ADMIN")
-          .antMatchers("/anonymous*").anonymous()
-          .antMatchers("/user/**").permitAll()
-          .antMatchers("/").permitAll()
-          .antMatchers("/images/**").permitAll()
-          .antMatchers("/js/**").permitAll()
-          .anyRequest().authenticated()
-          .and()
-          .formLogin()
-          .loginPage("/login")
-//          .loginProcessingUrl("/perform_login")
-          .defaultSuccessUrl("/", true)
+	protected void configure(final HttpSecurity http) throws Exception {
+		http.csrf().disable().authorizeRequests()
+				.anyRequest().permitAll()
+				.and().formLogin().usernameParameter("username").defaultSuccessUrl("/").permitAll()
 //          .failureUrl("/login.html?error=true")
 //          .failureHandler(authenticationFailureHandler())
-          .and()
-          .logout();
-//          .logoutUrl("/perform_logout")
+				.and().logout().logoutUrl("/user/logout").logoutSuccessUrl("/user/login").permitAll();
+//          
 //          .deleteCookies("JSESSIONID")
 //          .logoutSuccessUrl("/");
-          // ...
-    }
-
-	@Bean
-	public PasswordEncoder passwordEncoder() {
-		return new BCryptPasswordEncoder();
+		// ...
 	}
 }

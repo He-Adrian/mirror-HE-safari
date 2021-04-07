@@ -30,7 +30,7 @@ import ch.hearc.spring.hesafari.model.Todo;
  */
 @Controller
 public class BreakController {
-	
+
 	// Bean injection
 	@Autowired
 	BreakDAO breakDAO;
@@ -38,35 +38,33 @@ public class BreakController {
 	// Retrieve home.title from application.properties.
 	@Value("${home.title:Default title}")
 	private String homeTitle;
-	
-	//**********//
+
+	// **********//
 	// MAPPINGS //
-	//**********//
-	
+	// **********//
+
 	/**
 	 * Select the home view to render by returning its name
-	 * @RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+	 * 
+	 * @RequestMapping(value = "/", method = {RequestMethod.GET,
+	 *                       RequestMethod.POST})
 	 */
-	@RequestMapping(value = "/", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
 	public String home(Map<String, Object> model) {
-		
+
 		// Send title retrieved from application.properties
 		model.put("title", homeTitle);
 
 		// Put the todo list from the DAO
 		model.put("breaks", breakDAO.getAllbreaks());
-		for(Break b:breakDAO.getAllbreaks())
-		{
-			System.out.println(b.getLocation());
-		}
-		
 
 		// Return the page "home.html"
 		return "home";
 	}
-	
+
 	/**
 	 * Return the page that display todo for the selected date
+	 * 
 	 * @param strDate
 	 * @param model
 	 * @return
@@ -93,7 +91,6 @@ public class BreakController {
 //		// Return the page "home.html"
 //		return "todoByDate";
 //	}
-	
 
 	/**
 	 * Function called when a user wants to add a new todo
@@ -103,7 +100,7 @@ public class BreakController {
 	 */
 	@GetMapping("/form")
 	public String form(Map<String, Object> model) {
-		
+
 		// Put a new Todo (with no data)
 		model.put("todo", new Todo());
 
@@ -111,7 +108,6 @@ public class BreakController {
 		return "formulaire";
 	}
 
-	
 	/**
 	 * Save a new todo
 	 * 
