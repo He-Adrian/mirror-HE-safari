@@ -52,10 +52,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	protected void configure(final HttpSecurity http) throws Exception {
 		http.csrf().disable().authorizeRequests()
 				.anyRequest().permitAll()
-				.and().formLogin().usernameParameter("username").defaultSuccessUrl("/").permitAll()
+				.and().formLogin().loginPage("/user/login").usernameParameter("username").defaultSuccessUrl("/").permitAll()
 //          .failureUrl("/login.html?error=true")
 //          .failureHandler(authenticationFailureHandler())
-				.and().logout().logoutUrl("/user/logout").logoutSuccessUrl("/user/login").permitAll();
+				.and().logout().logoutUrl("/user/logout").permitAll();
 //          
 //          .deleteCookies("JSESSIONID")
 //          .logoutSuccessUrl("/");

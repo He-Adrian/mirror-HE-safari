@@ -21,27 +21,33 @@
 <!--  *************** fragment de navigation *************** -->
 <div th:fragment="navigation">
 	<nav class="navbar navbar-expand-lg navbar-light bg-light">
-	  <a class="navbar-brand" style="width: 15%;" href="/"><img style="width: 100%;" th:src="@{/images/logo.png}"/></a>
-	  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-	    <span class="navbar-toggler-icon"></span>
-	  </button>
-	
-	  <div class="collapse navbar-collapse" id="navbarSupportedContent">
-	    <ul class="navbar-nav mr-auto">
-	      <li class="nav-item active">
-	        <a class="nav-link" th:href="@{/}">Home <span class="sr-only">(current)</span></a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" th:href="@{/user/login}">Login</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link" th:href="@{/user/logout}">Logout</a>
-	      </li>
-	      <li class="nav-item">
-	        <a class="nav-link disabled" href="#">My profil</a>
-	      </li>
-	    </ul>
-	  </div>
+		<a class="navbar-brand" style="width: 15%;" href="/"><img
+			style="width: 100%;" th:src="@{/images/logo.png}" /></a>
+		<button class="navbar-toggler" type="button" data-toggle="collapse"
+			data-target="#navbarSupportedContent"
+			aria-controls="navbarSupportedContent" aria-expanded="false"
+			aria-label="Toggle navigation">
+			<span class="navbar-toggler-icon"></span>
+		</button>
+
+		<div class="collapse navbar-collapse" id="navbarSupportedContent">
+			<ul class="navbar-nav mr-auto">
+				<li class="nav-item active"><a class="nav-link" th:href="@{/}">Home<span
+						class="sr-only">(current)</span></a></li>
+				<li sec:authorize="isAnonymous()" class="nav-item"><a
+					class="nav-link" th:href="@{/user/login}">Login</a></li>
+				<li sec:authorize="isAnonymous()" class="nav-item"><a
+					class="nav-link" th:href="@{/user/logout}">Logout</a></li>
+				<li sec:authorize="isAuthenticated()" class="nav-item"><a
+					class="nav-link disabled" href="#">My profil</a></li>
+			</ul>
+			<div sec:authorize="isAuthenticated()"
+				class="navbar-form navbar-right">
+					Connected as : <i><span
+						th:text="${#authentication.getPrincipal().getUsername()}"></span>
+					</i>
+			</div>
+		</div>
 	</nav>
 </div>
 

@@ -10,16 +10,20 @@
 		<relativePath /> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.example</groupId>
-	<artifactId>Chap05_TodoProject</artifactId>
+	<artifactId>He_Safari</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>Chap05_TodoProject</name>
-	<description>Demo project for Spring Boot</description>
+	<name>HE SAFARI</name>
+	<description>Projet using spring boot</description>
 
 	<properties>
 		<java.version>11</java.version>
 	</properties>
 
 	<dependencies>
+		<dependency>
+			<groupId>org.thymeleaf.extras</groupId>
+			<artifactId>thymeleaf-extras-springsecurity5</artifactId>
+		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-thymeleaf</artifactId>
