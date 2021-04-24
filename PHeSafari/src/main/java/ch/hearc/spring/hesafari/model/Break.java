@@ -1,12 +1,19 @@
 package ch.hearc.spring.hesafari.model;
 
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
+
 public class Break {
 
 	/// Attributes
 	private int breakID;
-	private int from;
-	private int to;
+	@DateTimeFormat(pattern = "h:mm a")
+	private Date from;
+	@DateTimeFormat(pattern = "h:mm a")
+	private Date to;
 	private String location;
+	private String description;
 
 	public Break() {
 		///
@@ -20,11 +27,12 @@ public class Break {
 	 * @param to
 	 * @param location
 	 */
-	public Break(int breakID, int from, int to, String location) {
+	public Break(int breakID, Date from, Date to, String location, String description) {
 		this.breakID = breakID;
 		this.from = from;
 		this.to = to;
 		this.location = location;
+		this.description = description;
 	}
 
 	/**
@@ -39,19 +47,19 @@ public class Break {
 		this.breakID = breakID;
 	}
 
-	public int getFrom() {
+	public Date getFrom() {
 		return from;
 	}
 
-	public void setFrom(int from) {
+	public void setFrom(Date from) {
 		this.from = from;
 	}
 
-	public int getTo() {
+	public Date getTo() {
 		return to;
 	}
 
-	public void setTo(int to) {
+	public void setTo(Date to) {
 		this.to = to;
 	}
 
@@ -61,6 +69,14 @@ public class Break {
 
 	public void setLocation(String location) {
 		this.location = location;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 }
