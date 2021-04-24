@@ -4,12 +4,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
 import org.springframework.format.annotation.DateTimeFormat;
 
 public class Break {
 
 	/// Attributes
-//	private int breakID;
+	private int breakID;
 	@DateTimeFormat(pattern = "h:mm a")
 	private Date from;
 	@DateTimeFormat(pattern = "h:mm a")

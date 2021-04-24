@@ -31,8 +31,8 @@
 						<div th:each="break: ${breaks}" class="col-sm-4 mt-2">
 							<div class="card">
 								<div class="card-header">
-									<span th:text="${break.from}"></span> - <span
-										th:text="${break.to}"></span>
+									<span th:text="${#dates.format(break.from, 'HH:mm')}"></span> - <span
+										th:text="${#dates.format(break.to, 'HH:mm')}"></span>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">
