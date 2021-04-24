@@ -38,6 +38,9 @@ public class BreakController {
 	// Retrieve home.title from application.properties.
 	@Value("${home.title:Default title}")
 	private String homeTitle;
+	
+	@Value("${break.create:Default title}")
+	private String breakCreate;
 
 	// **********//
 	// MAPPINGS //
@@ -61,6 +64,17 @@ public class BreakController {
 		// Return the page "home.html"
 		return "home";
 	}
+	
+	@RequestMapping(value = "/create", method = { RequestMethod.GET, RequestMethod.POST })
+	public String create(Map<String, Object> model) {
+
+		// Send title retrieved from application.properties
+		model.put("title", breakCreate);
+
+		// Return the page "home.html"
+		return "create_break";
+	}
+	
 
 	/**
 	 * Return the page that display todo for the selected date
