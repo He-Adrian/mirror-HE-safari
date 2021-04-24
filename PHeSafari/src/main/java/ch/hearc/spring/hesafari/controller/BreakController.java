@@ -65,14 +65,21 @@ public class BreakController {
 		return "home";
 	}
 	
-	@RequestMapping(value = "/create", method = { RequestMethod.GET, RequestMethod.POST })
-	public String create(Map<String, Object> model) {
+	@GetMapping("/create")
+	public String create(Break newBreak) {
 
 		// Send title retrieved from application.properties
-		model.put("title", breakCreate);
+//		model.put("title", breakCreate);
 
 		// Return the page "home.html"
 		return "create_break";
+	}
+	
+	@PostMapping("/create")
+	public String processCreate(Break newBreak) {
+
+		// Return the page "home.html"
+		return "home";
 	}
 	
 
