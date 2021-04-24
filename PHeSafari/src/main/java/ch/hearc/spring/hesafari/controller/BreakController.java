@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.hearc.spring.hesafari.data.BreakDAO;
+import ch.hearc.spring.hesafari.jpa.BreakRepository;
 import ch.hearc.spring.hesafari.model.Break;
 import ch.hearc.spring.hesafari.model.Todo;
 
@@ -33,7 +34,7 @@ public class BreakController {
 
 	// Bean injection
 	@Autowired
-	BreakDAO breakDAO;
+	BreakRepository breakRepo;
 
 	// Retrieve home.title from application.properties.
 	@Value("${home.title:Default title}")
@@ -59,7 +60,7 @@ public class BreakController {
 		model.put("title", homeTitle);
 
 		// Put the todo list from the DAO
-		model.put("breaks", breakDAO.getAllbreaks());
+//		model.put("breaks", breakDAO.getAllbreaks());
 
 		// Return the page "home.html"
 		return "home";
@@ -77,6 +78,8 @@ public class BreakController {
 	
 	@PostMapping("/create")
 	public String processCreate(Break newBreak) {
+		
+		breakRepo.save(newBreak);
 
 		// Return the page "home.html"
 		return "home";

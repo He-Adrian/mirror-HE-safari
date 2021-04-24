@@ -35,7 +35,7 @@ public class BreakDAO {
 	 */
 	static {
 
-		breaks.put(1, new Break(1, new Date(), new Date(), "Cafetéria", "Grosse teuf"));
+//		breaks.put(1, new Break(1, new Date(), new Date(), "Cafetéria", "Grosse teuf"));
 	}
 
 	// ****************//
@@ -56,10 +56,10 @@ public class BreakDAO {
 	 * 
 	 * @param t
 	 */
-	public boolean saveTodo(Break t) {
+	public boolean saveBreak(Break newBreak) {
 		int id = newKey();
-//		t.setBreakID(id);
-		breaks.put(id, t);
+		newBreak.setBreakID(id);
+		breaks.put(id, newBreak);
 		return true;
 	}
 
