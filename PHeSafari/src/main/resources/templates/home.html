@@ -6,7 +6,7 @@
 <body>
 	<!-- Replace fragment  -->
 	<div th:replace="fragments/fragments.html :: navigation"></div>
-	
+
 	<div class="container">
 		<!--For Page-->
 		<div class="page">
@@ -16,27 +16,31 @@
 				<!--Card Header-->
 				<div class="card-header">
 					<p>
-						<i class="fa fa-bars"></i> <i class="fa fa-calendar ml-4" aria-hidden="true"></i> <i class="fa fa-star ml-4" aria-hidden="true"></i> <span
-							class="float-right"
-						> <span class="mr-4 navTask">Task</span> <span class="mr-4">Archive</span> <i class="fa fa-search" aria-hidden="true"></i>
+						<i class="fa fa-bars"></i> <i class="fa fa-calendar ml-4"
+							aria-hidden="true"></i> <i class="fa fa-star ml-4"
+							aria-hidden="true"></i> <span class="float-right"> <span
+							class="mr-4 navTask">Task</span> <span class="mr-4">Archive</span>
+							<i class="fa fa-search" aria-hidden="true"></i>
 						</span>
 					</p>
 				</div>
 				<!--Card Body-->
 				<div id="container">
 					<div class="row justify-content-start">
-						<!-- ITERATION -->				
+						<!-- ITERATION -->
 						<div th:each="break: ${breaks}" class="col-sm-4 mt-2">
 							<div class="card">
 								<div class="card-header">
-									<span th:text="${break.from}"></span> - 
-									<span th:text="${break.to}"></span> 
+									<span th:text="${break.from}"></span> - <span
+										th:text="${break.to}"></span>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">
 										<span th:text="${break.location}"></span>
 									</h5>
-									<p class="card-text">Adrian doit encore faire la desciption</p>
+									<p class="card-text">
+										<span th:text="${break.description}"></span>
+									</p>
 									<a href="#" class="btn btn-primary">Attend</a>
 								</div>
 							</div>
