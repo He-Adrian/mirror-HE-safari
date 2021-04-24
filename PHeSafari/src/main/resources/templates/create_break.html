@@ -15,16 +15,38 @@
 				<h2>Add a new break</h2>
 			</div>
 			<div class="card-body">
-				
-					<form action="#" th:action="@{/create}" th:object="${break}"
-						method="post">
-						
-						<div class="form-group">
-							<label for="location">Location</label> <input type="text"
-								th:field="*{location}" class="form-control" placeholder="Caféteria" name="location" id="location"/> <small
-								class="form-text text-muted">Precise the break's location</small>
-						</div>
-						<!-- 
+
+				<form action="#" th:action="@{/create}" th:object="${break}"
+					method="post">
+
+					<div class="form-group">
+						<label for="location">Location</label> <input type="text"
+							th:field="*{location}" class="form-control"
+							placeholder="Caféteria" name="location" id="location" /> <small
+							class="form-text text-muted">Precise the break's location</small>
+					</div>
+
+					<div class="form-group">
+						<label for="from">From</label> <input type="time"
+							th:field="*{from}" class="form-control" name="from" id="from" />
+						<small class="form-text text-muted">When is your break
+							starting ?</small>
+					</div>
+
+					<div class="form-group">
+						<label for="to">To</label> <input type="time"
+							th:field="*{to}" class="form-control" name="to" id="to" />
+						<small class="form-text text-muted">When is your break finishing</small>
+					</div>
+
+
+					<div class="form-group">
+						<label for="description">Description</label> <input type="text"
+							th:field="*{description}" class="form-control"
+							placeholder="Grosse teuf !!!" name="description" id="description" />
+						<small class="form-text text-muted">Describe your break ;)</small>
+					</div>
+					<!-- 
 
 						<div class="form-group">
 							<label for="message">Todo</label> <input type="text"
@@ -75,11 +97,8 @@
 							<small id="priorityHelp" class="form-text text-muted">Insérez
 								la priorité de la tâche</small>
 						</div>
-
-
-
-						<button type="submit" class="btn btn-primary">Submit</button>
 					-->
+					<button type="submit" class="btn btn-primary">Submit</button>
 				</form>
 			</div>
 		</div>
