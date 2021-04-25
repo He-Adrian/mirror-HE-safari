@@ -10,7 +10,8 @@
 	<div class="container">
 		<h1>Form</h1>
 
-		<div th:if="${error}" class="alert alert-danger" role="alert">A problem occurred during the break creation process</div>
+		<div th:if="${error}" class="alert alert-danger" role="alert">A
+			problem occurred during the break creation process</div>
 
 
 		<div class="card">
@@ -25,20 +26,21 @@
 					<div class="form-group">
 						<label for="location">Location</label> <input type="text"
 							th:field="*{location}" class="form-control"
-							placeholder="Caféteria" name="location" id="location" /> <small
-							class="form-text text-muted">Precise the break's location</small>
+							placeholder="Caféteria" name="location" id="location"
+							maxlength="20" required /> <small class="form-text text-muted">Precise
+							the break's location</small>
 					</div>
 
 					<div class="form-group">
 						<label for="from">From</label> <input type="time"
-							th:field="*{from}" class="form-control" name="from" id="from" />
-						<small class="form-text text-muted">When is your break
-							starting ?</small>
+							th:field="*{from}" class="form-control" name="from" id="from"
+							required /> <small class="form-text text-muted">When is
+							your break starting ?</small>
 					</div>
 
 					<div class="form-group">
 						<label for="to">To</label> <input type="time" th:field="*{to}"
-							class="form-control" name="to" id="to" /> <small
+							class="form-control" name="to" id="to" required /> <small
 							class="form-text text-muted">When is your break finishing</small>
 					</div>
 
@@ -52,7 +54,8 @@
 						-->
 						<label for="description">Description</label>
 						<textarea th:field="*{description}" class="form-control"
-							placeholder="Grosse teuf !!!" name="description" id="description"></textarea>
+							placeholder="Grosse teuf !!!" name="description" id="description"
+							maxlength="250"></textarea>
 						<small class="form-text text-muted">Describe your break ;)</small>
 					</div>
 					<!-- 
