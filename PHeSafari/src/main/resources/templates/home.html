@@ -4,6 +4,7 @@
 <head th:insert="fragments/fragments.html :: header">
 </head>
 <body>
+
 	<!-- Replace fragment  -->
 	<div th:replace="fragments/fragments.html :: navigation"></div>
 
@@ -20,11 +21,8 @@
 				<!--Card Header-->
 				<div class="card-header">
 					<p>
-						<a th:href="@{/create}"><i class="fa fa-plus-square ml-4"
-							aria-hidden="true"></i></a> <span class="float-right"> <span
-							class="mr-4 navTask">Task</span> <span class="mr-4">Archive</span>
-							<i class="fa fa-search" aria-hidden="true"></i>
-						</span>
+						Create a break <a th:href="@{/create}"><i
+							class="fa fa-plus-square ml-4" aria-hidden="true"></i></a>
 					</p>
 				</div>
 				<!--Card Body-->
@@ -32,7 +30,7 @@
 					<div class="row justify-content-start">
 						<!-- ITERATION -->
 						<div th:each="break: ${breaks}" class="col-sm-4 mt-2">
-							<div class="card border-primary">
+							<div class="card border-primary mb-3">
 								<div class="card-header">
 									<span th:text="${#dates.format(break.from, 'HH:mm')}"></span> -
 									<span th:text="${#dates.format(break.to, 'HH:mm')}"></span>
@@ -50,6 +48,10 @@
 									<a th:href="@{/attend(id=${break.breakID})}"
 										class="btn btn-primary"
 										th:disabled="${invalid_breaks.contains(break.breakID)}">Attend</a>
+								</div>
+								<div class="card-footer text-muted">
+									Owner's reputation : 3
+									<!--<span th:text="${break.owner.reputation}"></span>  -->
 								</div>
 							</div>
 						</div>
