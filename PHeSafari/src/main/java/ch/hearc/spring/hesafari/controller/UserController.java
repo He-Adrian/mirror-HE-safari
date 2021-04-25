@@ -15,31 +15,41 @@ import ch.hearc.spring.hesafari.model.User;
 
 @Controller
 public class UserController {
-	
+
 	@Autowired
-    private UserRepository userRepository;
-	
-	@RequestMapping(value = "/user/login", method = {RequestMethod.GET, RequestMethod.POST})
+	private UserRepository userRepository;
+
+	@RequestMapping(value = "/user/login", method = { RequestMethod.GET, RequestMethod.POST })
 	public String login(Map<String, Object> model) {
 		return "login";
 	}
 
-	@RequestMapping(value = "/user/signup", method = {RequestMethod.GET, RequestMethod.POST})
+	@RequestMapping(value = "/user/signup", method = { RequestMethod.GET, RequestMethod.POST })
 	public String signup(Map<String, Object> model) {
 		model.put("user", new User());
-		
+
 		return "signup";
 	}
-	
+
 	@PostMapping("/user/process_signup")
 	public RedirectView processRegister(User user) {
-	    BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
-	    String encodedPassword = passwordEncoder.encode(user.getPassword());
-	    user.setPassword(encodedPassword);
-	     
-	    userRepository.save(user);
-	     
-	    return new RedirectView("/");
+		BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
+		String encodedPassword = passwordEncoder.encode(user.getPassword());
+		user.setPassword(encodedPassword);
+
+		userRepository.save(user);
+
+		return new RedirectView("/");
 	}
-	
+
+	@RequestMapping(value = "/users", method = { RequestMethod.GET, RequestMethod.POST })
+	public String breakUsers(Map<String, Object> model) {
+
+		// Put the todo list from the DAO
+		model.put("users", userRepository.findAll());
+
+		// Return the page "break_users.html"
+		return "break_users";
+	}
+
 }

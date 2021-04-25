@@ -7,5 +7,5 @@ import ch.hearc.spring.hesafari.model.User;
 
 public interface UserRepository extends JpaRepository<User, Long> {
 	@Query("SELECT u FROM User u WHERE u.username = ?1")
-    public User findByUsername(String username);
+	public User findByUsername(String username);
 }
