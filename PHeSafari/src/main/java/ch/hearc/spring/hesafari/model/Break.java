@@ -2,6 +2,8 @@ package ch.hearc.spring.hesafari.model;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Set;
 import java.sql.Date;
 import java.sql.Time;
 
@@ -10,6 +12,7 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -22,7 +25,7 @@ public class Break {
 	/// Attributes
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int breakID;
+	private long breakID;
 
 	@DateTimeFormat(pattern = "h:mm a")
 	@Column(name =  "fromDate", unique = false, nullable = false)
@@ -37,6 +40,9 @@ public class Break {
 
 	@Column(unique = true, nullable = false, length = 100)
 	private String description;
+	
+	@ManyToMany(mappedBy = "attendedBreaks")
+	Set<User> attends = Collections.emptySet();
 
 	public Break() {
 		///
@@ -62,11 +68,11 @@ public class Break {
 	 * Getters and Setters
 	 */
 
-	public int getBreakID() {
+	public long getBreakID() {
 		return breakID;
 	}
 
-	public void setBreakID(int breakID) {
+	public void setBreakID(long breakID) {
 		this.breakID = breakID;
 	}
 

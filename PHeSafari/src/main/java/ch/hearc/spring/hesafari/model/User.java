@@ -1,6 +1,8 @@
 package ch.hearc.spring.hesafari.model;
 
+import java.util.Collections;
 import java.util.Date;
+import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
@@ -12,7 +14,7 @@ public class User {
 	/// Attributes
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-	private int userID;
+	private long userID;
     
     @Column(unique = true, nullable = false, length = 20)
 	private String username;
@@ -28,6 +30,13 @@ public class User {
     
     @Column(name = "reputation", nullable = false, length = 20)
 	private int reputation = 0;
+    
+    @ManyToMany
+    @JoinTable(
+    		name="break_attend",
+    		joinColumns = @JoinColumn(name = "user_id"),
+    		inverseJoinColumns = @JoinColumn(name = "break_id"))
+    Set<Break> attendedBreaks = Collections.emptySet();
 
 	/**
 	 * Default Constructor
@@ -60,11 +69,11 @@ public class User {
 	 * Getters and Setters
 	 */
 
-	public int getUserID() {
+	public long getUserID() {
 		return userID;
 	}
 
-	public void setUserID(int userID) {
+	public void setUserID(long userID) {
 		this.userID = userID;
 	}
 
@@ -106,6 +115,14 @@ public class User {
 
 	public void setReputation(int reputation) {
 		this.reputation = reputation;
+	}
+	
+	public Set<Break> getAttendedBreaks() {
+		return attendedBreaks;
+	}
+
+	public void setAttendedBreaks(Set<Break> attendedBreaks) {
+		this.attendedBreaks = attendedBreaks;
 	}
 
 }
