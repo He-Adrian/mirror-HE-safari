@@ -77,9 +77,16 @@ public class BreakController {
 	}
 	
 	@PostMapping("/create")
-	public String processCreate(Break newBreak) {
+	public String processCreate(Break newBreak, BindingResult bindingResult, Map<String, Object> model, RedirectAttributes redirAttrs) {
+		
+		if (bindingResult.hasErrors()) {
+			model.put("breakCreated", true);
+			return "/create";
+		}
 		
 		breakRepo.save(newBreak);
+		
+		redirAttrs.addFlashAttribute("breakCreated", true);
 
 		// Return the page "home.html"
 		return "redirect:/";
