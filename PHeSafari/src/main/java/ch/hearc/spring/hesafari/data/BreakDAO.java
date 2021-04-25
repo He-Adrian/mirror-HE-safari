@@ -12,8 +12,6 @@ import java.util.stream.Collectors;
 import org.springframework.stereotype.Component;
 
 import ch.hearc.spring.hesafari.model.Break;
-import ch.hearc.spring.hesafari.model.Todo;
-import ch.hearc.spring.hesafari.model.TodoPriority;
 
 /**
  * DAO = Data Access Object Used to have an access to model entities

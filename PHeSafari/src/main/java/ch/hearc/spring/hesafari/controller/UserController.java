@@ -42,14 +42,4 @@ public class UserController {
 		return new RedirectView("/");
 	}
 
-	@RequestMapping(value = "/users", method = { RequestMethod.GET, RequestMethod.POST })
-	public String breakUsers(Map<String, Object> model) {
-
-		// Put the todo list from the DAO
-		model.put("users", userRepository.findAll());
-
-		// Return the page "break_users.html"
-		return "break_users";
-	}
-
 }

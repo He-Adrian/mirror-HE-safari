@@ -21,7 +21,7 @@
 				<div id="container">
 					<div class="row justify-content-start">
 						<!-- ITERATION -->
-						<div th:each="user: ${users}" class="col-sm-4 mt-2">
+						<div th:each="user: ${break.attends}" class="col-sm-4 mt-2">
 							<div class="card">
 								<div class="card-header">
 									<p>User information</p>
@@ -42,6 +42,11 @@
 							</div>
 						</div>
 					</div>
+				</div>
+				<div class="card-footer border-success">
+					<p>
+						Owned by <span th:text="${break.owner}"></span>
+					</p>
 				</div>
 			</div>
 		</div>

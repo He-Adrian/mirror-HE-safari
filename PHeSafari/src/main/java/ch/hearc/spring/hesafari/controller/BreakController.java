@@ -2,9 +2,11 @@ package ch.hearc.spring.hesafari.controller;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
 import java.util.Date;
 import java.util.Map;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -24,7 +26,6 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import ch.hearc.spring.hesafari.data.BreakDAO;
 import ch.hearc.spring.hesafari.jpa.BreakRepository;
 import ch.hearc.spring.hesafari.model.Break;
-import ch.hearc.spring.hesafari.model.Todo;
 import ch.hearc.spring.hesafari.model.User;
 
 /**
@@ -65,7 +66,21 @@ public class BreakController {
 		// Put the todo list from the DAO
 		model.put("breaks", breakRepo.findAll());
 
-		// Return the page "home.html"
+		// Get current user
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+		if (principal instanceof User) {
+			User user = (User) principal;
+
+			long[] invalidBreaks = breakRepo.findAll().stream()
+					.filter(b -> b.getAttends().stream().filter(u -> u.getUsername().equals(user.getUsername()))
+							.findFirst().isPresent() || b.getOwner().getUsername().equals(user.getUsername()))
+					.mapToLong(b -> b.getBreakID()).toArray();
+
+			model.put("invalid_breaks", invalidBreaks);
+		} else {
+			model.put("invalid_breaks", Collections.emptyList());
+		}
 		return "home";
 	}
 
@@ -103,8 +118,7 @@ public class BreakController {
 
 		if (b.isEmpty()) {
 			return "redirect:/";
-		}
-		{
+		} else {
 			// Get current user
 			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
@@ -114,11 +128,29 @@ public class BreakController {
 				// Add the break to the user
 				user.getAttendedBreaks().add(b.get());
 
+				// Increment reputation
+				b.get().getOwner().setReputation(b.get().getOwner().getReputation() + 1);
+
 				return "redirect:/";
 
 			} else {
 				return "redirect:/user/login";
 			}
+		}
+	}
+
+	@RequestMapping(value = "/break", method = { RequestMethod.GET, RequestMethod.POST })
+	public String breakUsers(Map<String, Object> model, @RequestParam String id) {
+
+		Optional<Break> b = breakRepo.findById(Long.parseLong(id));
+
+		if (b.isEmpty()) {
+			return "redirect:/";
+		} else {
+			model.put("break", b.get());
+
+			// Return the page "break_users.html"
+			return "break_users";
 		}
 	}
 
@@ -151,22 +183,6 @@ public class BreakController {
 //		// Return the page "home.html"
 //		return "todoByDate";
 //	}
-
-	/**
-	 * Function called when a user wants to add a new todo
-	 * 
-	 * @param model
-	 * @return
-	 */
-	@GetMapping("/form")
-	public String form(Map<String, Object> model) {
-
-		// Put a new Todo (with no data)
-		model.put("todo", new Todo());
-
-		// Return the page "formulaire.html"
-		return "formulaire";
-	}
 
 	/**
 	 * Save a new todo

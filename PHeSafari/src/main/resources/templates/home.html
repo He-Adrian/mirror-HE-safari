@@ -32,22 +32,24 @@
 					<div class="row justify-content-start">
 						<!-- ITERATION -->
 						<div th:each="break: ${breaks}" class="col-sm-4 mt-2">
-							<div class="card">
+							<div class="card border-primary">
 								<div class="card-header">
 									<span th:text="${#dates.format(break.from, 'HH:mm')}"></span> -
 									<span th:text="${#dates.format(break.to, 'HH:mm')}"></span>
 								</div>
 								<div class="card-body">
-									<h5 class="card-title">
-										<span th:text="${break.location}"></span>
-									</h5>
+									<a th:href="@{/break(id=${break.breakID})}">
+										<h5 class="card-title">
+											<span th:text="${break.location}"></span>
+										</h5>
+									</a>
 									<p class="card-text">
 										<span style="white-space: pre-wrap"
 											th:text="${break.description}"></span>
 									</p>
 									<a th:href="@{/attend(id=${break.breakID})}"
-										class="btn btn-primary">Attend</a> <a href="/users"
-										class="stretched-link"></a>
+										class="btn btn-primary"
+										th:disabled="${invalid_breaks.contains(break.breakID)}">Attend</a>
 								</div>
 							</div>
 						</div>

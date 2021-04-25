@@ -12,7 +12,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -28,11 +30,11 @@ public class Break {
 	private long breakID;
 
 	@DateTimeFormat(pattern = "h:mm a")
-	@Column(name =  "fromDate", unique = false, nullable = false)
+	@Column(name = "fromDate", unique = false, nullable = false)
 	private Time from;
 
 	@DateTimeFormat(pattern = "h:mm a")
-	@Column(name =  "toDate", unique = false, nullable = false)
+	@Column(name = "toDate", unique = false, nullable = false)
 	private Time to;
 
 	@Column(unique = true, nullable = false, length = 20)
@@ -40,7 +42,10 @@ public class Break {
 
 	@Column(unique = true, nullable = false, length = 100)
 	private String description;
-	
+
+	@ManyToOne
+	private User owner;
+
 	@ManyToMany(mappedBy = "attendedBreaks")
 	Set<User> attends = Collections.emptySet();
 
@@ -113,6 +118,22 @@ public class Break {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public Set<User> getAttends() {
+		return attends;
+	}
+
+	public void setAttends(Set<User> attends) {
+		this.attends = attends;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
 	}
 
 }

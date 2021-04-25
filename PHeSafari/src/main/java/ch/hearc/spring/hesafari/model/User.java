@@ -2,6 +2,7 @@ package ch.hearc.spring.hesafari.model;
 
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -12,31 +13,31 @@ import javax.persistence.*;
 @Table(name = "users")
 public class User {
 	/// Attributes
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long userID;
-    
-    @Column(unique = true, nullable = false, length = 20)
+
+	@Column(unique = true, nullable = false, length = 20)
 	private String username;
-    
-    @Column(nullable = false, length = 60)
+
+	@Column(nullable = false, length = 60)
 	private String password;
-    
-    @Column(name = "role", nullable = false, length = 20)
+
+	@Column(name = "role", nullable = false, length = 20)
 	private String role = "User";
-    
-    @Column(name = "className", nullable = false, length = 20)
+
+	@Column(name = "className", nullable = false, length = 20)
 	private String className;
-    
-    @Column(name = "reputation", nullable = false, length = 20)
+
+	@Column(name = "reputation", nullable = false, length = 20)
 	private int reputation = 0;
-    
-    @ManyToMany
-    @JoinTable(
-    		name="break_attend",
-    		joinColumns = @JoinColumn(name = "user_id"),
-    		inverseJoinColumns = @JoinColumn(name = "break_id"))
-    Set<Break> attendedBreaks = Collections.emptySet();
+
+	@OneToMany(targetEntity = Break.class)
+	private List<Break> ownedBreaks = Collections.emptyList();
+
+	@ManyToMany
+	@JoinTable(name = "break_attend", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "break_id"))
+	Set<Break> attendedBreaks = Collections.emptySet();
 
 	/**
 	 * Default Constructor
@@ -116,7 +117,7 @@ public class User {
 	public void setReputation(int reputation) {
 		this.reputation = reputation;
 	}
-	
+
 	public Set<Break> getAttendedBreaks() {
 		return attendedBreaks;
 	}
