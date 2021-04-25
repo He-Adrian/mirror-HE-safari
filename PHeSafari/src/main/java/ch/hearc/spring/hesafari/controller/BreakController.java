@@ -80,8 +80,8 @@ public class BreakController {
 	public String processCreate(Break newBreak, BindingResult bindingResult, Map<String, Object> model, RedirectAttributes redirAttrs) {
 		
 		if (bindingResult.hasErrors()) {
-			model.put("breakCreated", true);
-			return "/create";
+			model.put("error", true);
+			return "create_break";
 		}
 		
 		breakRepo.save(newBreak);
