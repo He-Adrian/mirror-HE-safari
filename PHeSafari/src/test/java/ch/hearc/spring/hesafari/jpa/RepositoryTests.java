@@ -56,12 +56,12 @@ public class RepositoryTests {
 		Break b = new Break();
 		b.setLocation("Caféteria");
 		b.setDescription("Grosse teuf");
-		b.setFrom("12:45");
-		b.setFrom("13:30");
+		b.setFrom("12:45:00");
+		b.setTo("13:30:00");
 
 		Break savedB = breakRepo.save(b);
-//		Break existUser = entityManager.find(Break.class, savedB.getBreakID());
+		Break existUser = entityManager.find(Break.class, savedB.getBreakID());
 		
-//		assertThat(b.getLocation()).isEqualTo(existUser.getLocation());
+		assertThat(b.getLocation()).isEqualTo(existUser.getLocation());
 	}
 }

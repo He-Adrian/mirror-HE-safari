@@ -3,6 +3,7 @@ package ch.hearc.spring.hesafari.model;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.sql.Date;
+import java.sql.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -24,12 +25,12 @@ public class Break {
 	private int breakID;
 
 	@DateTimeFormat(pattern = "h:mm a")
-	@Column(unique = true, nullable = false)
-	private Date from;
+	@Column(name =  "fromDate", unique = false, nullable = false)
+	private Time from;
 
 	@DateTimeFormat(pattern = "h:mm a")
-	@Column(unique = true, nullable = false)
-	private Date to;
+	@Column(name =  "toDate", unique = false, nullable = false)
+	private Time to;
 
 	@Column(unique = true, nullable = false, length = 20)
 	private String location;
@@ -49,7 +50,7 @@ public class Break {
 	 * @param to
 	 * @param location
 	 */
-	public Break(int breakID, Date from, Date to, String location, String description) {
+	public Break(int breakID, Time from, Time to, String location, String description) {
 		this.breakID = breakID;
 		this.from = from;
 		this.to = to;
@@ -69,7 +70,7 @@ public class Break {
 		this.breakID = breakID;
 	}
 
-	public Date getFrom() {
+	public Time getFrom() {
 		return from;
 	}
 
@@ -80,15 +81,16 @@ public class Break {
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
+		this.from = Time.valueOf(String.format("%s:00", strFrom));
 	}
 
-	public Date getTo() {
+	public Time getTo() {
 		return to;
 	}
 
-	public void setTo(String strFrom) {
-		this.to = Date.valueOf(strFrom);// new SimpleDateFormat("H:mm").parse(strFrom);
-
+	public void setTo(String strTo) {
+//		this.to = Date.valueOf(strFrom);// new SimpleDateFormat("H:mm").parse(strFrom);
+		this.to = Time.valueOf(String.format("%s:00", strTo));
 	}
 
 	public String getLocation() {

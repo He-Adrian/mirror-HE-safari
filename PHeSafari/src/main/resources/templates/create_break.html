@@ -34,16 +34,22 @@
 					</div>
 
 					<div class="form-group">
-						<label for="to">To</label> <input type="time"
-							th:field="*{to}" class="form-control" name="to" id="to" />
-						<small class="form-text text-muted">When is your break finishing</small>
+						<label for="to">To</label> <input type="time" th:field="*{to}"
+							class="form-control" name="to" id="to" /> <small
+							class="form-text text-muted">When is your break finishing</small>
 					</div>
 
 
 					<div class="form-group">
-						<label for="description">Description</label> <input type="text"
+						<!-- 
+											<label for="description">Description</label> <input type="text"
 							th:field="*{description}" class="form-control"
 							placeholder="Grosse teuf !!!" name="description" id="description" />
+						<small class="form-text text-muted">Describe your break ;)</small>
+						-->
+						<label for="description">Description</label> <textarea
+							th:field="*{description}" class="form-control"
+							placeholder="Grosse teuf !!!" name="description" id="description"></textarea>
 						<small class="form-text text-muted">Describe your break ;)</small>
 					</div>
 					<!-- 

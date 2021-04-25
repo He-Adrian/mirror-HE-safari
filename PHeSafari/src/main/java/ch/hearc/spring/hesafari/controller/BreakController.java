@@ -60,7 +60,7 @@ public class BreakController {
 		model.put("title", homeTitle);
 
 		// Put the todo list from the DAO
-//		model.put("breaks", breakDAO.getAllbreaks());
+		model.put("breaks", breakRepo.findAll());
 
 		// Return the page "home.html"
 		return "home";
@@ -82,7 +82,7 @@ public class BreakController {
 		breakRepo.save(newBreak);
 
 		// Return the page "home.html"
-		return "home";
+		return "redirect:/";
 	}
 	
 

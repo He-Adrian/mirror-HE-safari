@@ -8,6 +8,10 @@
 	<div th:replace="fragments/fragments.html :: navigation"></div>
 
 	<div class="container">
+
+		<div class="alert alert-success" role="alert">Your break has
+			been added !</div>
+
 		<!--For Page-->
 		<div class="page">
 			<p class="h2 text-center" th:text="${title}"></p>
@@ -16,9 +20,8 @@
 				<!--Card Header-->
 				<div class="card-header">
 					<p>
-						<i class="fa fa-bars"></i> <i class="fa fa-calendar ml-4"
-							aria-hidden="true"></i> <i class="fa fa-star ml-4"
-							aria-hidden="true"></i> <span class="float-right"> <span
+						<a th:href="@{/create}"><i class="fa fa-plus-square ml-4"
+							aria-hidden="true"></i></a> <span class="float-right"> <span
 							class="mr-4 navTask">Task</span> <span class="mr-4">Archive</span>
 							<i class="fa fa-search" aria-hidden="true"></i>
 						</span>
@@ -31,8 +34,8 @@
 						<div th:each="break: ${breaks}" class="col-sm-4 mt-2">
 							<div class="card">
 								<div class="card-header">
-									<span th:text="${#dates.format(break.from, 'HH:mm')}"></span> - <span
-										th:text="${#dates.format(break.to, 'HH:mm')}"></span>
+									<span th:text="${#dates.format(break.from, 'HH:mm')}"></span> -
+									<span th:text="${#dates.format(break.to, 'HH:mm')}"></span>
 								</div>
 								<div class="card-body">
 									<h5 class="card-title">
