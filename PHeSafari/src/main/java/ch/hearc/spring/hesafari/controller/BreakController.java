@@ -4,9 +4,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Map;
+import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
@@ -23,6 +25,7 @@ import ch.hearc.spring.hesafari.data.BreakDAO;
 import ch.hearc.spring.hesafari.jpa.BreakRepository;
 import ch.hearc.spring.hesafari.model.Break;
 import ch.hearc.spring.hesafari.model.Todo;
+import ch.hearc.spring.hesafari.model.User;
 
 /**
  * 
@@ -39,7 +42,7 @@ public class BreakController {
 	// Retrieve home.title from application.properties.
 	@Value("${home.title:Default title}")
 	private String homeTitle;
-	
+
 	@Value("${break.create:Default title}")
 	private String breakCreate;
 
@@ -65,7 +68,7 @@ public class BreakController {
 		// Return the page "home.html"
 		return "home";
 	}
-	
+
 	@GetMapping("/create")
 	public String create(Break newBreak) {
 
@@ -75,23 +78,49 @@ public class BreakController {
 		// Return the page "home.html"
 		return "create_break";
 	}
-	
+
 	@PostMapping("/create")
-	public String processCreate(Break newBreak, BindingResult bindingResult, Map<String, Object> model, RedirectAttributes redirAttrs) {
-		
+	public String processCreate(Break newBreak, BindingResult bindingResult, Map<String, Object> model,
+			RedirectAttributes redirAttrs) {
+
 		if (bindingResult.hasErrors()) {
 			model.put("error", true);
 			return "create_break";
 		}
-		
+
 		breakRepo.save(newBreak);
-		
+
 		redirAttrs.addFlashAttribute("breakCreated", true);
 
 		// Return the page "home.html"
 		return "redirect:/";
 	}
-	
+
+	@GetMapping("/attend")
+	public String attendTo(@RequestParam String id) {
+		// Find the break
+		Optional<Break> b = breakRepo.findById(Long.parseLong(id));
+
+		if (b.isEmpty()) {
+			return "redirect:/";
+		}
+		{
+			// Get current user
+			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+
+			if (principal instanceof User) {
+				User user = (User) principal;
+
+				// Add the break to the user
+				user.getAttendedBreaks().add(b.get());
+
+				return "redirect:/";
+
+			} else {
+				return "redirect:/user/login";
+			}
+		}
+	}
 
 	/**
 	 * Return the page that display todo for the selected date

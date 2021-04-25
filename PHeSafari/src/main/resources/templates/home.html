@@ -44,7 +44,7 @@
 									<p class="card-text">
 										<span style="white-space: pre-wrap" th:text="${break.description}"></span>
 									</p>
-									<a href="#" class="btn btn-primary">Attend</a>
+									<a th:href="@{/attend(id=${break.breakID})}" class="btn btn-primary">Attend</a>
 								</div>
 							</div>
 						</div>
