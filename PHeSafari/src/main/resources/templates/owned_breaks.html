@@ -4,17 +4,11 @@
 <head th:insert="fragments/fragments.html :: header">
 </head>
 <body>
-
 	<!-- Replace fragment  -->
 	<div th:replace="fragments/fragments.html :: navigation"></div>
-
 	<div class="container">
-
-		<div th:if="${breakCreated}" class="alert alert-success" role="alert">Your
-			break has been added !</div>
-		<div th:if="${breakAttended}" class="alert alert-success" role="alert">You
-			have successfully attended the break !</div>
-
+		<div th:if="${noBreak}" class="alert alert-info" role="alert">You
+			don't own any break !</div>
 		<!--For Page-->
 		<div class="page">
 			<p class="h2 text-center" th:text="${title}"></p>
@@ -22,24 +16,17 @@
 			<div class="card">
 				<!--Card Header-->
 				<div class="card-header">
-					Create a break <a th:href="@{/create}"><i
-						class="fa fa-plus-square ml-2" aria-hidden="true"></i></a> <span
-						class="float-right">
-						<form class="mb-1" th:action="@{/}" method="GET">
-							<span class="input-group"> <span class="form-outline">
-									<input type="search" id="search" name="search"
-									class="form-control" th:value="${searched}" />
-							</span> <input type="submit" class="btn btn-primary"></input>
-							</span> <i class="fa fa-search" aria-hidden="true"></i>
-						</form>
-					</span>
+					<h1>Your owned breaks</h1>
 				</div>
 				<!--Card Body-->
+				<!--Card Body-->
 				<div id="container">
+					<div th:if="${noBreak}" class="alert alert-info" role="alert">You
+						don't own any break !</div>
 					<div class="row justify-content-start">
 						<!-- ITERATION -->
 						<div th:each="break: ${breaks}" class="col-sm-4 mt-2">
-							<div class="card border-primary mb-3">
+							<div class="card border-info mb-3">
 								<div class="card-header">
 									<span th:text="${#dates.format(break.from, 'HH:mm')}"></span> -
 									<span th:text="${#dates.format(break.to, 'HH:mm')}"></span>
@@ -54,13 +41,6 @@
 										<span style="white-space: pre-wrap"
 											th:text="${break.description}"></span>
 									</p>
-									<a th:href="@{/attend(id=${break.breakID})}"><button
-											class="btn btn-primary"
-											th:disabled="${invalid_breaks.contains(break.breakID)}">Attend</button>
-									</a>
-								</div>
-								<div class="card-footer text-muted">
-									Owner's reputation : <span th:text="${break.owner.reputation}"></span>
 								</div>
 							</div>
 						</div>
@@ -69,6 +49,7 @@
 			</div>
 		</div>
 	</div>
+
 	<div th:replace="fragments/fragments.html :: scripts"></div>
 </body>
 </html>

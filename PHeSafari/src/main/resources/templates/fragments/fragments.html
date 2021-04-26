@@ -41,7 +41,7 @@
 				<li sec:authorize="isAuthenticated()" class="nav-item"><a
 					class="nav-link" th:href="@{/user/logout}">Logout</a></li>
 				<li sec:authorize="isAuthenticated()" class="nav-item"><a
-					class="nav-link disabled" href="#">My profil</a></li>
+					class="nav-link" th:href="@{/user/owned}">My profil</a></li>
 			</ul>
 			<div sec:authorize="isAuthenticated()"
 				class="navbar-form navbar-right">

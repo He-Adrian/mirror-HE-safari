@@ -4,8 +4,10 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Collections;
 import java.util.Date;
+import java.util.List;
 import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +27,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import ch.hearc.spring.hesafari.data.BreakDAO;
 import ch.hearc.spring.hesafari.jpa.BreakRepository;
+import ch.hearc.spring.hesafari.jpa.UserRepository;
 import ch.hearc.spring.hesafari.model.Break;
 import ch.hearc.spring.hesafari.model.User;
 
@@ -38,7 +41,10 @@ public class BreakController {
 
 	// Bean injection
 	@Autowired
-	BreakRepository breakRepo;
+	private BreakRepository breakRepo;
+
+	@Autowired
+	private UserRepository userRepository;
 
 	// Retrieve home.title from application.properties.
 	@Value("${home.title:Default title}")
@@ -58,13 +64,20 @@ public class BreakController {
 	 *                       RequestMethod.POST})
 	 */
 	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
-	public String home(Map<String, Object> model) {
+	public String home(@RequestParam Optional<String> search, Map<String, Object> model) {
 
 		// Send title retrieved from application.properties
 		model.put("title", homeTitle);
 
-		// Put the todo list from the DAO
-		model.put("breaks", breakRepo.findAll());
+		if (search.isEmpty()) {
+			// Put the todo list from the DAO
+			model.put("breaks", breakRepo.findAll());
+			model.put("searched", "");
+		} else {
+			System.out.println(search);
+			model.put("breaks", breakRepo.findAllByLocation(search.get()));
+			model.put("searched", search.get());
+		}
 
 		// Get current user
 		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
@@ -72,10 +85,10 @@ public class BreakController {
 		if (principal instanceof User) {
 			User user = (User) principal;
 
-			long[] invalidBreaks = breakRepo.findAll().stream()
+			List<Long> invalidBreaks = breakRepo.findAll().stream()
 					.filter(b -> b.getAttends().stream().filter(u -> u.getUsername().equals(user.getUsername()))
 							.findFirst().isPresent() || b.getOwner().getUsername().equals(user.getUsername()))
-					.mapToLong(b -> b.getBreakID()).toArray();
+					.mapToLong(b -> b.getBreakID()).boxed().collect(Collectors.toList());
 
 			model.put("invalid_breaks", invalidBreaks);
 		} else {
@@ -103,16 +116,28 @@ public class BreakController {
 			return "create_break";
 		}
 
-		breakRepo.save(newBreak);
+		// Get current user
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
-		redirAttrs.addFlashAttribute("breakCreated", true);
+		if (principal instanceof User) {
+			User user = (User) principal;
 
-		// Return the page "home.html"
-		return "redirect:/";
+			// Set Owner
+			newBreak.setOwner(user);
+
+			breakRepo.save(newBreak);
+
+			redirAttrs.addFlashAttribute("breakCreated", true);
+
+			// Return the page "home.html"
+			return "redirect:/";
+		} else {
+			return "redirect:/user/login";
+		}
 	}
 
 	@GetMapping("/attend")
-	public String attendTo(@RequestParam String id) {
+	public String attendTo(@RequestParam String id, RedirectAttributes redirAttrs) {
 		// Find the break
 		Optional<Break> b = breakRepo.findById(Long.parseLong(id));
 
@@ -130,6 +155,11 @@ public class BreakController {
 
 				// Increment reputation
 				b.get().getOwner().setReputation(b.get().getOwner().getReputation() + 1);
+
+				userRepository.save(user);
+				userRepository.save(b.get().getOwner());
+
+				redirAttrs.addFlashAttribute("breakAttended", true);
 
 				return "redirect:/";
 
@@ -153,78 +183,5 @@ public class BreakController {
 			return "break_users";
 		}
 	}
-
-	/**
-	 * Return the page that display todo for the selected date
-	 * 
-	 * @param strDate
-	 * @param model
-	 * @return
-	 */
-//	@GetMapping("/todoByDate")
-//	public String todoByDate(@RequestParam(value = "selectedDate", required = false) String strDate, Map<String, Object> model) {
-//		
-//		model.put("title", homeTitle);
-//
-//		// Put the todo list by the given date
-//		Date date;
-//		try 
-//		{
-//			date = new SimpleDateFormat("yyyy-MM-dd").parse(strDate);
-//		
-//			model.put("todos", todo.getAllTodosByDate(date));
-//			model.put("date", date);
-//			model.put("totalTime", todo.getTotalTime(date));
-//			
-//		} catch (ParseException e) {
-//			throw new RuntimeException("Error during the parse of the date");
-//		}
-//
-//		// Return the page "home.html"
-//		return "todoByDate";
-//	}
-
-	/**
-	 * Save a new todo
-	 * 
-	 * @param todo
-	 * @param errors
-	 * @param model
-	 * @return
-	 */
-//	@PostMapping("/Todo")
-//	public String saveTodo(@Validated @ModelAttribute Todo todo, BindingResult errors, Model model, RedirectAttributes redirAttrs) {
-//		
-//		if (!errors.hasErrors()) {
-//			if(this.todo.saveTodo(todo))
-//			{
-//				//If the todo has been correctly saved
-//				return ((errors.hasErrors()) ? "todo" : "redirect:/");
-//			}
-//			else
-//			{
-//				throw new RuntimeException("The task is not complete ! Please fill all the fields");
-//			}
-//		}
-//		return ((errors.hasErrors()) ? "todo" : "redirect:/");
-//	}
-
-	/**
-	 * Check/Uncheck the todo
-	 * 
-	 * @param todo
-	 * @param errors
-	 * @param model
-	 * @return
-	 */
-//	@PostMapping("/Check")
-//	public String checkTodo(@Validated @ModelAttribute Todo todo, BindingResult errors, Model model) {
-//		
-//		if (!errors.hasErrors()) {
-//			// Call the DAO function to check/uncheck the todo
-//			this.todo.checkTodo(todo.getTodoID(), !todo.getChecked());
-//		}
-//		return ((errors.hasErrors()) ? "todo" : "redirect:/");
-//	}
 
 }

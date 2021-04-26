@@ -9,6 +9,7 @@ import java.sql.Time;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -46,7 +47,7 @@ public class Break {
 	@ManyToOne
 	private User owner;
 
-	@ManyToMany(mappedBy = "attendedBreaks")
+	@ManyToMany(mappedBy = "attendedBreaks", fetch = FetchType.EAGER)
 	Set<User> attends = Collections.emptySet();
 
 	public Break() {
