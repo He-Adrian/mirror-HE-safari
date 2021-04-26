@@ -1,0 +1,62 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Insert header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body>
+	<!-- Replace fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+
+	<div class="container">
+
+		<div th:if="${breakCreated}"class="alert alert-success" role="alert">Your break has
+			been added !</div>
+
+		<!--For Page-->
+		<div class="page">
+			<p class="h2 text-center" th:text="${title}"></p>
+			<!--Card-->
+			<div class="card">
+				<!--Card Header-->
+				<div class="card-header">
+					<p>
+						<a th:href="@{/create}"><i class="fa fa-plus-square ml-4"
+							aria-hidden="true"></i></a> <span class="float-right"> <span
+							class="mr-4 navTask">Task</span> <span class="mr-4">Archive</span>
+							<i class="fa fa-search" aria-hidden="true"></i>
+						</span>
+					</p>
+				</div>
+				<!--Card Body-->
+				<div id="container">
+					<div class="row justify-content-start">
+						<!-- ITERATION -->
+						<div th:each="break: ${breaks}" class="col-sm-4 mt-2">
+							<div class="card">
+								<div class="card-header">
+									<span th:text="${#dates.format(break.from, 'HH:mm')}"></span> -
+									<span th:text="${#dates.format(break.to, 'HH:mm')}"></span>
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">
+										<span th:text="${break.location}"></span>
+									</h5>
+									<p class="card-text">
+										<span style="white-space: pre-wrap" th:text="${break.description}"></span>
+									</p>
+<<<<<<< HEAD
+									<a href="#" class="btn btn-primary">Attend</a>
+=======
+									<a th:href="@{/attend(id=${break.breakID})}" class="btn btn-primary">Attend</a>
+>>>>>>> origin/database
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/fragments.html :: scripts"></div>
+</body>
+</html>

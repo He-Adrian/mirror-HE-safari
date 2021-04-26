@@ -1,0 +1,42 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Insert header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body>
+	<!-- Replace fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+	<!-- Template from https://bbbootstrap.com/snippets/simple-todo-list-template-11821916 -->
+	<!--For Page-->
+	<div class="page">
+		<div class="container">
+			<h1>Signup</h1>
+			<form name='f' th:action="@{/user/process_signup}" th:object="${user}" method='POST'>
+				<div class="form-group">
+					<label for="username">Username</label> <input type="text"
+						class="form-control" id="username" name='username'
+						placeholder="Enter username" th:field="*{username}" required>
+				</div>
+				<div class="form-group">
+					<label for="username">Class name</label> <input type="text"
+						class="form-control" id="username" name='username'
+						placeholder="Enter your class name" th:field="*{className}" required>
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label> <input type="password"
+						class="form-control" name='password' id="password"
+						placeholder="Password" th:field="*{password}" required>
+				</div>
+				<div class="form-group">
+					<label for="password">Confirm
+						your password</label> <input id="confirm_password" type="password"
+						name="password" class="form-control"
+						placeholder="Confirm password" required>
+				</div>
+				<button type="submit" class="btn btn-primary btn-lg">Signup</button>
+			</form>
+		</div>
+	</div>
+	<script src="js/signup.js"></script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Insert header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body>
+	<!-- Replace fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+	<!-- Template from https://bbbootstrap.com/snippets/simple-todo-list-template-11821916 -->
+	<!--For Page-->
+	<div class="page">
+		<div class="container">
+			<h1>Login</h1>
+			<div th:if="${param.error}" class="alert alert-danger" role="alert">
+				Invalid username and password.</div>
+			<div th:if="${param.logout}" class="alert alert-success">You
+				have been logged out.</div>
+			<form name='f' th:action="@{/user/login}" method='POST'>
+				<div class="form-group">
+					<label for="username">Username</label> <input type="text"
+						class="form-control" id="username" name='username'
+						placeholder="Enter username">
+				</div>
+				<div class="form-group">
+					<label for="password">Password</label> <input type="password"
+						class="form-control" name='password' id="password"
+						placeholder="Password">
+				</div>
+				<div class="d-flex justify-content-center">
+					Don't have an account ? <a th:href="@{/user/signup}"
+						class="link-danger"> Sign Up</a>
+				</div>
+				<button type="submit" class="btn btn-primary btn-lg">Login</button>
+			</form>
+		</div>
+	</div>
+</body>
+</html>

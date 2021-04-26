@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+<!-- Insert header fragment -->
+<head th:insert="fragments/fragments.html :: header">
+</head>
+<body>
+	<!-- Replace fragment  -->
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+
+	<div class="container">
+		<!--For Page-->
+		<div class="page">
+			<p class="h2 text-center" th:text="${title}"></p>
+			<!--Card-->
+			<div class="card">
+				<!--Card Header-->
+				<div class="card-header">
+					<h1>Break users</h1>
+				</div>
+				<!--Card Body-->
+				<div id="container">
+					<div class="row justify-content-start">
+						<!-- ITERATION -->
+						<div th:each="user: ${break.attends}" class="col-sm-4 mt-2">
+							<div class="card mb-3">
+								<div class="card-header">
+									<p>User information</p>
+								</div>
+								<div class="card-body">
+									<h5 class="card-title">
+										<span th:text="${user.username}"></span>
+									</h5>
+									<p class="card-text">
+										<span style="white-space: pre-wrap"
+											th:text="${user.className}"></span>
+									</p>
+									<p class="card-text">
+										<i>Reputation : </i> <span style="white-space: pre-wrap"
+											th:text="${user.reputation}"></span>
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="card-footer border-success">
+					<p>
+						Owned by <span th:text="${break.owner.username}"></span>
+					</p>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div th:replace="fragments/fragments.html :: scripts"></div>
+</body>
+</html>
