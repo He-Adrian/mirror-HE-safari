@@ -1,0 +1,119 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:insert="fragments/fragments.html :: header" />
+
+<body>
+
+	<div th:replace="fragments/fragments.html :: navigation"></div>
+
+	<div class="container">
+
+		<div th:if="${error}" class="alert alert-danger" role="alert">A
+			problem occurred during the break creation process</div>
+
+
+		<div class="card mt-3">
+			<div class="card-header">
+				<h2>Add a new break</h2>
+			</div>
+			<div class="card-body">
+
+				<form action="#" th:action="@{/create}" th:object="${break}"
+					method="post">
+
+					<div class="form-group">
+						<label for="location">Location</label> <input type="text"
+							th:field="*{location}" class="form-control"
+							placeholder="Caféteria" name="location" id="location" /> <small
+							class="form-text text-muted">Precise the break's location</small>
+					</div>
+
+					<div class="form-group">
+						<label for="from">From</label> <input type="time"
+							th:field="*{from}" class="form-control" name="from" id="from" />
+						<small class="form-text text-muted">When is your break
+							starting ?</small>
+					</div>
+
+					<div class="form-group">
+						<label for="to">To</label> <input type="time" th:field="*{to}"
+							class="form-control" name="to" id="to" /> <small
+							class="form-text text-muted">When is your break finishing</small>
+					</div>
+
+
+					<div class="form-group">
+						<!-- 
+											<label for="description">Description</label> <input type="text"
+							th:field="*{description}" class="form-control"
+							placeholder="Grosse teuf !!!" name="description" id="description" />
+						<small class="form-text text-muted">Describe your break ;)</small>
+						-->
+						<label for="description">Description</label>
+						<textarea th:field="*{description}" class="form-control"
+							placeholder="Grosse teuf !!!" name="description" id="description"></textarea>
+						<small class="form-text text-muted">Describe your break ;)</small>
+					</div>
+					<!-- 
+
+						<div class="form-group">
+							<label for="message">Todo</label> <input type="text"
+								th:field="*{message}" class="form-control todo-list-input" />
+							<small id="messageHelp" class="form-text text-muted">Insérez
+								la tâche</small>
+						</div>
+
+						<div class="form-group">
+							<label for="intTime">Durée du todo (en heure)</label> <input
+								type="number" class="form-control" th:field=*{time} />
+							<small id="timeHelp" class="form-text text-muted">Insérez
+								la durée de la tâche</small>
+						</div>
+
+						<div class="form-group">
+							<label for="date">Date du todo</label> <input type="date"
+								class="form-control" th:field=*{date} /> <small
+								id="dateHelp" class="form-text text-muted">Insérez
+								la date de fin de la tâche</small>
+						</div>
+
+
+						<div class="form-group">
+							<label for="checked">Validation du todo</label> <input
+								class="checkbox todo-checked" type="checkbox"
+								th:checked="*{checked}" th:field="*{checked}" /> <small
+								id="checkedHelp" class="form-text text-muted">La
+								tâche a-t-elle été déjà faite ?</small>
+						</div>
+
+
+						<div class="form-group">
+							<label for="priority">Priorité du todo</label> <select
+								class="form-control priority-list" th:field="*{priority}">
+								<option value="LOW">Basse</option>
+								<option value="MEDIUM">Moyenne</option>
+								<option value="HIGH">Haute</option>
+								<option value="WHOCARES">Une priorité ?</option>
+							</select>
+
+							In case we use a list which contains every priority type 
+						    <select th:field="*{priority}" th:remove="all-but-first">
+				                <option th:each="priority : ${priorities}"
+				                        th:value="${priority}" th:text="${priority.description}">Priorité</option>
+				                <option>Autre priorité</option>
+				            </select>
+							<small id="priorityHelp" class="form-text text-muted">Insérez
+								la priorité de la tâche</small>
+						</div>
+					-->
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</form>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/fragments.html :: scripts"></div>
+
+</body>
+</html>
