@@ -72,7 +72,7 @@ deploy_ssh:
   script:
     - echo "deploy apps"
     - who
-    - sudo docker-compose down --rmi all
+    - docker-compose down --rmi all
     - docker-compose up -d --build
     - echo "deploy ok"
   only:
