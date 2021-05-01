@@ -51,7 +51,7 @@ katalon_test_suite:
 
 sonarcloud:
   image: maven:latest
-  stage: sonarqube
+  stage: sonarcloud
   script:
     - echo "start sonarqube stage"
     #- cd PHeSafari && mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
