@@ -3,9 +3,11 @@ package ch.hearc.spring.hesafari.model;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,6 +15,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 
 @Entity
+@EntityScan(basePackages = {"ch.hearc.spring.hesafari.model"})
 @Table(name = "users")
 public class User implements UserDetails {
 	/// Attributes
