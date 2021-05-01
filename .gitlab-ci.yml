@@ -16,9 +16,11 @@ before_script:
   - echo $CI_COMMIT_SHORT_SHA # calls another predefined variable
 
 build:
+  image: maven:latest
   stage: build
   script:
     - echo "Build process"
+    - mvn clean package -Dmaven.test.skip=true
     - echo "Build ok"
   only:
     - master
