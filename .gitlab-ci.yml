@@ -23,7 +23,7 @@ build:
   only:
     - master
   tags:
-    - alpine-docker
+    - HESAFARI-RUNNER
 
 unittest:
   stage: test
@@ -33,7 +33,7 @@ unittest:
   only:
     - master
   tags:
-    - alpine-docker
+    - HESAFARI-RUNNER
 
 katalon_test_suite:
   stage: test
@@ -43,7 +43,7 @@ katalon_test_suite:
   only:
     - master
   tags:
-    - alpine-docker
+    - HESAFARI-RUNNER
 
 sonarqube:
   stage: sonarqube
@@ -53,7 +53,7 @@ sonarqube:
   only:
     - master
   tags:
-    - alpine-docker
+    - HESAFARI-RUNNER
 
 deploy_ssh:
   stage: deploy
@@ -65,7 +65,7 @@ deploy_ssh:
   only:
     - master
   tags:
-    - alpine-docker
+    - HESAFARI-RUNNER
   when: manual
 
 after_script:
