@@ -21,22 +21,23 @@ build:
   stage: build
   script:
     - echo "Build process"
-    - cd PHeSafari && mvn clean package -Dmaven.test.skip=true
+    - mvn clean package -Dmaven.test.skip=true
     - echo "Build ok"
   only:
     - master
   tags:
-    - HESAFARI-RUNNER
+    - HESAFARI-RUNNNER
 
 unittest:
   stage: test
   script:
     - echo "start test"
+    #- mvn clean package
     - echo "test ok"
   only:
     - master
   tags:
-    - HESAFARI-RUNNER
+    - HESAFARI-RUNNNER
 
 katalon_test_suite:
   stage: test
@@ -46,17 +47,20 @@ katalon_test_suite:
   only:
     - master
   tags:
-    - HESAFARI-RUNNER
+    - HESAFARI-RUNNNER
 
 sonarqube:
+  image: maven:latest
   stage: sonarqube
   script:
     - echo "start sonarqube stage"
+    - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+    - echo "Wow, code is so clean!"
     - echo "sonarqube ok"
   only:
     - master
   tags:
-    - HESAFARI-RUNNER
+    - HESAFARI-RUNNNER
 
 deploy_ssh:
   stage: deploy
@@ -70,7 +74,7 @@ deploy_ssh:
   only:
     - master
   tags:
-    - HESAFARI-RUNNER
+    - HESAFARI-RUNNNER
   when: manual
 
 after_script:
