@@ -54,7 +54,7 @@ sonarqube:
   stage: sonarqube
   script:
     - echo "start sonarqube stage"
-    - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
+    - cd PHeSafari && mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
     - echo "Wow, code is so clean!"
     - echo "sonarqube ok"
   only:
