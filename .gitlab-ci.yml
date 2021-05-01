@@ -63,7 +63,6 @@ deploy_ssh:
     - echo "do some stuff before"
   script:
     - echo "deploy apps"
-    - /usr/local/bin/docker-compose --version
     - docker-compose down --rmi all
     - docker-compose up -d --build
     - echo "deploy ok"
