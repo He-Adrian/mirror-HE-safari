@@ -1,7 +1,7 @@
 image: ubuntu
 
 variables:
-  SOME_VAR: "some value"
+  SOME_VAR: "some value.."
 
 stages:
   - build
