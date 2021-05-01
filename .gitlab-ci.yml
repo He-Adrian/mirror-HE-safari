@@ -1,4 +1,4 @@
-image: maven:latest
+image: ubuntu
 
 variables:
   SOME_VAR: "some value"
