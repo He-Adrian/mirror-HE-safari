@@ -26,7 +26,7 @@ build:
   only:
     - master
   tags:
-    - HESAFARI-RUNNNER
+    - HESAFARI-RUNNER
 
 unittest:
   stage: test
@@ -37,7 +37,7 @@ unittest:
   only:
     - master
   tags:
-    - HESAFARI-RUNNNER
+    - HESAFARI-RUNNER
 
 katalon_test_suite:
   stage: test
@@ -47,7 +47,7 @@ katalon_test_suite:
   only:
     - master
   tags:
-    - HESAFARI-RUNNNER
+    - HESAFARI-RUNNER
 
 sonarqube:
   image: maven:latest
@@ -60,7 +60,7 @@ sonarqube:
   only:
     - master
   tags:
-    - HESAFARI-RUNNNER
+    - HESAFARI-RUNNER
 
 deploy_ssh:
   stage: deploy
@@ -74,7 +74,7 @@ deploy_ssh:
   only:
     - master
   tags:
-    - HESAFARI-RUNNNER
+    - HESAFARI-RUNNER
   when: manual
 
 after_script:
