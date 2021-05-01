@@ -1,20 +1,16 @@
-image: maven:latest
+image: ubuntu
 
 variables:
   SOME_VAR: "some value"
-  SONAR_TOKEN: $SONAR_TOKEN
 
 stages:
   - build
   - test
-  - sonarcloud
+  - sonarqube
   - deploy
 
+
 before_script:
-  - apk update
-  - apk upgrade
-  - apk add python python-dev py-pip build-base
-  - pip install docker-compose
   - echo "Start CI/CD"
   - echo "SOME_VAR = $SOME_VAR" # calls my custom variable
   - echo $CI_JOB_STAGE  # calls a predefined variable -  https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
@@ -22,10 +18,11 @@ before_script:
 
 build:
   image: maven:latest
+
   stage: build
   script:
     - echo "Build process"
-    - cd PHeSafari && mvn clean package -Dmaven.test.skip=true
+    - mvn clean package -Dmaven.test.skip=true
     - echo "Build ok"
   only:
     - master
@@ -33,10 +30,11 @@ build:
     - HESAFARI-RUNNER
 
 unittest:
+  image: maven:latest
+  
   stage: test
   script:
     - echo "start test"
-    #- mvn clean package
     - echo "test ok"
   only:
     - master
@@ -52,19 +50,20 @@ katalon_test_suite:
     - master
   tags:
     - HESAFARI-RUNNER
+    
 
-sonarcloud:
+sonarqube:
   image: maven:latest
-  stage: sonarcloud
+  stage: sonarqube
   script:
-    - echo "start sonarqube stage"
-    #- cd PHeSafari && mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-    - echo "Wow, code is so clean!"
+    - echo "start sonarqube"
     - echo "sonarqube ok"
+    #- mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
   only:
     - master
   tags:
     - HESAFARI-RUNNER
+
 
 deploy_ssh:
   stage: deploy
@@ -72,6 +71,7 @@ deploy_ssh:
     - echo "do some stuff before"
   script:
     - echo "deploy apps"
+    - who
     - docker-compose down --rmi all
     - docker-compose up -d --build
     - echo "deploy ok"
