@@ -20,7 +20,7 @@ import ch.hearc.spring.hesafari.model.Break;
 //	}
 //}
 
-@Repository
-public interface BreakRepository extends JpaRepository<Long,Long> {
-	// this a dynamic request so we cannot use @query annotation
-	}
+//@Repository
+//public interface BreakRepository extends JpaRepository<Long,Long> {
+//	// this a dynamic request so we cannot use @query annotation
+//	}
