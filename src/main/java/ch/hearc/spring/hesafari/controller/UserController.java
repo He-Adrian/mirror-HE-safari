@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.servlet.view.RedirectView;
 
-//import ch.hearc.spring.hesafari.jpa.BreakRepository;
+import ch.hearc.spring.hesafari.jpa.BreakRepository;
 import ch.hearc.spring.hesafari.jpa.UserRepository;
 import ch.hearc.spring.hesafari.model.Break;
 import ch.hearc.spring.hesafari.model.User;
@@ -26,8 +26,8 @@ public class UserController {
 	@Autowired
 	private UserRepository userRepository;
 
-//	@Autowired
-//	private BreakRepository breakRepo;
+	@Autowired
+	private BreakRepository breakRepo;
 
 	@Autowired
 	private PasswordEncoder passwordEncoder;
@@ -62,17 +62,17 @@ public class UserController {
 
 		if (principal instanceof User) {
 			User user = (User) principal;
-//
-//			List<Break> ownedBreaks = breakRepo.findAll().stream()
-//					.filter(b -> b.getOwner().getUsername().equals(user.getUsername())).collect(Collectors.toList());
-//
-//			ownedBreaks.forEach(b -> System.out.println(b.getOwner().getUsername()));
-//
-//			model.put("breaks", ownedBreaks);
-//
-//			if (ownedBreaks.size() == 0) {
-//				model.put("noBreak", true);
-//			}
+
+			List<Break> ownedBreaks = breakRepo.findAll().stream()
+					.filter(b -> b.getOwner().getUsername().equals(user.getUsername())).collect(Collectors.toList());
+
+			ownedBreaks.forEach(b -> System.out.println(b.getOwner().getUsername()));
+
+			model.put("breaks", ownedBreaks);
+
+			if (ownedBreaks.size() == 0) {
+				model.put("noBreak", true);
+			}
 
 			return "owned_breaks";
 

@@ -44,11 +44,11 @@ public class Break {
 	@Column(unique = true, nullable = false, length = 100)
 	private String description;
 
-//	@ManyToOne
-//	private User owner;
+	@ManyToOne
+	private User owner;
 //
-//	@ManyToMany(mappedBy = "attendedBreaks", fetch = FetchType.EAGER)
-//	Set<User> attends = Collections.emptySet();
+	@ManyToMany(mappedBy = "attendedBreaks", fetch = FetchType.EAGER)
+	Set<User> attends = Collections.emptySet();
 
 	public Break() {
 		///
@@ -121,20 +121,20 @@ public class Break {
 		this.description = description;
 	}
 
-//	public Set<User> getAttends() {
-//		return attends;
-//	}
-//
-//	public void setAttends(Set<User> attends) {
-//		this.attends = attends;
-//	}
-//
-//	public User getOwner() {
-//		return owner;
-//	}
-//
-//	public void setOwner(User owner) {
-//		this.owner = owner;
-//	}
+	public Set<User> getAttends() {
+		return attends;
+	}
+
+	public void setAttends(Set<User> attends) {
+		this.attends = attends;
+	}
+
+	public User getOwner() {
+		return owner;
+	}
+
+	public void setOwner(User owner) {
+		this.owner = owner;
+	}
 
 }
