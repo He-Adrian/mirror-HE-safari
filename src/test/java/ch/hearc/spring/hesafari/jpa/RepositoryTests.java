@@ -52,13 +52,5 @@ public class RepositoryTests {
 		assertThat(user.getUsername()).isEqualTo(existUser.getUsername());
 		assertThat(user.getPassword()).isEqualTo(encodedPassword);
 		assertThat(passwordEncoder.matches("testpass", user.getPassword())).isTrue();
-		
-		PasswordEncoder passwordEncoder = PasswordEncoderFactories.createDelegatingPasswordEncoder();
-
-		String encodedPassword = passwordEncoder.encode("testpass");
-
-		boolean test = passwordEncoder.matches("testpass", encodedPassword);
-		assertThat(test).isTrue();
-
 	}
 }
