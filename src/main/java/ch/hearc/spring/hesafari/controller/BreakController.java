@@ -25,8 +25,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import ch.hearc.spring.hesafari.jpa.BreakRepository;
-import ch.hearc.spring.hesafari.jpa.UserRepository;
+//import ch.hearc.spring.hesafari.jpa.BreakRepository;
+//import ch.hearc.spring.hesafari.jpa.UserRepository;
 import ch.hearc.spring.hesafari.model.Break;
 import ch.hearc.spring.hesafari.model.User;
 

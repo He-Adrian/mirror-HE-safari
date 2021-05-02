@@ -5,7 +5,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 
-import ch.hearc.spring.hesafari.jpa.UserRepository;
+//import ch.hearc.spring.hesafari.jpa.UserRepository;
 import ch.hearc.spring.hesafari.model.User;
  
 public class CustomUserDetailsService implements UserDetailsService {
