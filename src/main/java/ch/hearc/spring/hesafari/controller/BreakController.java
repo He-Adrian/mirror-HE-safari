@@ -84,12 +84,12 @@ public class BreakController {
 		if (principal instanceof User) {
 			User user = (User) principal;
 
-			List<Long> invalidBreaks = breakRepo.findAll().stream()
-					.filter(b -> b.getAttends().stream().filter(u -> u.getUsername().equals(user.getUsername()))
-							.findFirst().isPresent() || b.getOwner().getUsername().equals(user.getUsername()))
-					.mapToLong(b -> b.getBreakID()).boxed().collect(Collectors.toList());
+//			List<Long> invalidBreaks = breakRepo.findAll().stream()
+//					.filter(b -> b.getAttends().stream().filter(u -> u.getUsername().equals(user.getUsername()))
+//							.findFirst().isPresent() || b.getOwner().getUsername().equals(user.getUsername()))
+//					.mapToLong(b -> b.getBreakID()).boxed().collect(Collectors.toList());
 
-			model.put("invalid_breaks", invalidBreaks);
+//			model.put("invalid_breaks", invalidBreaks);
 		} else {
 			model.put("invalid_breaks", Collections.emptyList());
 		}
@@ -121,12 +121,12 @@ public class BreakController {
 		if (principal instanceof User) {
 			User user = (User) principal;
 
-			// Set Owner
-			newBreak.setOwner(user);
-
-			breakRepo.save(newBreak);
-
-			redirAttrs.addFlashAttribute("breakCreated", true);
+//			// Set Owner
+//			newBreak.setOwner(user);
+//
+//			breakRepo.save(newBreak);
+//
+//			redirAttrs.addFlashAttribute("breakCreated", true);
 
 			// Return the page "home.html"
 			return "redirect:/";
@@ -149,14 +149,14 @@ public class BreakController {
 			if (principal instanceof User) {
 				User user = (User) principal;
 
-				// Add the break to the user
-				user.getAttendedBreaks().add(b.get());
-
-				// Increment reputation
-				b.get().getOwner().setReputation(b.get().getOwner().getReputation() + 1);
-
-				userRepository.save(user);
-				userRepository.save(b.get().getOwner());
+//				// Add the break to the user
+//				user.getAttendedBreaks().add(b.get());
+//
+//				// Increment reputation
+//				b.get().getOwner().setReputation(b.get().getOwner().getReputation() + 1);
+//
+//				userRepository.save(user);
+//				userRepository.save(b.get().getOwner());
 
 				redirAttrs.addFlashAttribute("breakAttended", true);
 

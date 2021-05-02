@@ -62,17 +62,17 @@ public class UserController {
 
 		if (principal instanceof User) {
 			User user = (User) principal;
-
-			List<Break> ownedBreaks = breakRepo.findAll().stream()
-					.filter(b -> b.getOwner().getUsername().equals(user.getUsername())).collect(Collectors.toList());
-
-			ownedBreaks.forEach(b -> System.out.println(b.getOwner().getUsername()));
-
-			model.put("breaks", ownedBreaks);
-
-			if (ownedBreaks.size() == 0) {
-				model.put("noBreak", true);
-			}
+//
+//			List<Break> ownedBreaks = breakRepo.findAll().stream()
+//					.filter(b -> b.getOwner().getUsername().equals(user.getUsername())).collect(Collectors.toList());
+//
+//			ownedBreaks.forEach(b -> System.out.println(b.getOwner().getUsername()));
+//
+//			model.put("breaks", ownedBreaks);
+//
+//			if (ownedBreaks.size() == 0) {
+//				model.put("noBreak", true);
+//			}
 
 			return "owned_breaks";
 
