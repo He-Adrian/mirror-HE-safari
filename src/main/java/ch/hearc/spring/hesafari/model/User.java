@@ -15,7 +15,6 @@ import org.springframework.security.core.userdetails.UserDetails;
 import javax.persistence.*;
 
 @Entity
-@EntityScan(basePackages = {"ch.hearc.spring.hesafari.model"})
 @Table(name = "users")
 public class User implements UserDetails {
 	/// Attributes
