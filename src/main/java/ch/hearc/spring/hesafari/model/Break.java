@@ -121,13 +121,13 @@ public class Break {
 		this.description = description;
 	}
 
-	public Set<User> getAttends() {
-		return attends;
-	}
-
-	public void setAttends(Set<User> attends) {
-		this.attends = attends;
-	}
+//	public Set<User> getAttends() {
+//		return attends;
+//	}
+//
+//	public void setAttends(Set<User> attends) {
+//		this.attends = attends;
+//	}
 
 	public User getOwner() {
 		return owner;

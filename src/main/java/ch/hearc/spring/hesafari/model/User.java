@@ -123,13 +123,13 @@ public class User implements UserDetails {
 		this.reputation = reputation;
 	}
 
-	public Set<Break> getAttendedBreaks() {
-		return attendedBreaks;
-	}
-
-	public void setAttendedBreaks(Set<Break> attendedBreaks) {
-		this.attendedBreaks = attendedBreaks;
-	}
+//	public Set<Break> getAttendedBreaks() {
+//		return attendedBreaks;
+//	}
+//
+//	public void setAttendedBreaks(Set<Break> attendedBreaks) {
+//		this.attendedBreaks = attendedBreaks;
+//	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
