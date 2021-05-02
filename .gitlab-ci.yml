@@ -3,6 +3,7 @@ image: maven:latest
 variables:
   SOME_VAR: "some value"
   DOCKER_HOST: "unix:///var/run/docker.sock"
+  SONAR_TOKEN: "ffaf0917dfad8280aff24216b575151f125d5b25"
 
 stages:
   - build
