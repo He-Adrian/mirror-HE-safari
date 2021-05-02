@@ -2,7 +2,6 @@ image: maven:latest
 
 variables:
   SOME_VAR: "some value..."
-  DOCKER_HOST: "tcp://0.0.0.0:2375"
 
 stages:
   - build
@@ -74,7 +73,7 @@ deploy_ssh:
   script:
     - echo "deploy apps"
     - pwd
-    - ls
+    - unset DOCKER_HOST
     - docker-compose down --rmi all
     - docker-compose up -d --build
     - echo "deploy ok"
