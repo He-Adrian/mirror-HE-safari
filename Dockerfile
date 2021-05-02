@@ -4,6 +4,11 @@ FROM openjdk:11 as build
 # Set the current working directory inside the image
 WORKDIR /app
 
+# TODO MARTY BEURK
+RUN apt-get update && \
+      apt-get -y install sudo
+RUN useradd -m docker && echo "docker:docker" | chpasswd && adduser docker sudo
+
 # Copy maven executable to the image
 COPY mvnw .
 COPY .mvn .mvn
