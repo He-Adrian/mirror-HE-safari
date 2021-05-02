@@ -1,7 +1,8 @@
 image: maven:latest
 
 variables:
-  SOME_VAR: "some value"
+  SOME_VAR: "some value..."
+  DOCKER_HOST: "127.0.0.1"
 
 stages:
   - build
@@ -15,6 +16,7 @@ before_script:
   - echo "SOME_VAR = $SOME_VAR" # calls my custom variable
   - echo $CI_JOB_STAGE  # calls a predefined variable -  https://docs.gitlab.com/ee/ci/variables/predefined_variables.html
   - echo $CI_COMMIT_SHORT_SHA # calls another predefined variable
+  - echo $DOCKER_HOST
 
 build:
   image: maven:latest
