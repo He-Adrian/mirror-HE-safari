@@ -84,12 +84,12 @@ public class BreakController {
 		if (principal instanceof User) {
 			User user = (User) principal;
 
-//			List<Long> invalidBreaks = breakRepo.findAll().stream()
-//					.filter(b -> b.getAttends().stream().filter(u -> u.getUsername().equals(user.getUsername()))
-//							.findFirst().isPresent() || b.getOwner().getUsername().equals(user.getUsername()))
-//					.mapToLong(b -> b.getBreakID()).boxed().collect(Collectors.toList());
-//
-//			model.put("invalid_breaks", invalidBreaks);
+			List<Long> invalidBreaks = breakRepo.findAll().stream()
+					.filter(b -> b.getAttends().stream().filter(u -> u.getUsername().equals(user.getUsername()))
+							.findFirst().isPresent() || b.getOwner().getUsername().equals(user.getUsername()))
+					.mapToLong(b -> b.getBreakID()).boxed().collect(Collectors.toList());
+
+			model.put("invalid_breaks", invalidBreaks);
 		} else {
 			model.put("invalid_breaks", Collections.emptyList());
 		}
@@ -150,7 +150,7 @@ public class BreakController {
 				User user = (User) principal;
 
 				// Add the break to the user
-//				user.getAttendedBreaks().add(b.get());
+				user.getAttendedBreaks().add(b.get());
 
 				// Increment reputation
 				b.get().getOwner().setReputation(b.get().getOwner().getReputation() + 1);

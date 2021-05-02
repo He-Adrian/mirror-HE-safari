@@ -40,9 +40,9 @@ public class User implements UserDetails {
 	@OneToMany(targetEntity = Break.class, fetch = FetchType.EAGER)
 	private List<Break> ownedBreaks = Collections.emptyList();
 
-//	@ManyToMany(fetch = FetchType.EAGER)
-//	@JoinTable(name = "break_attend", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "break_id"))
-//	Set<Break> attendedBreaks = Collections.emptySet();
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(name = "break_attend", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "break_id"))
+	Set<Break> attendedBreaks = Collections.emptySet();
 
 	/**
 	 * Default Constructor
@@ -123,13 +123,13 @@ public class User implements UserDetails {
 		this.reputation = reputation;
 	}
 
-//	public Set<Break> getAttendedBreaks() {
-//		return attendedBreaks;
-//	}
-//
-//	public void setAttendedBreaks(Set<Break> attendedBreaks) {
-//		this.attendedBreaks = attendedBreaks;
-//	}
+	public Set<Break> getAttendedBreaks() {
+		return attendedBreaks;
+	}
+
+	public void setAttendedBreaks(Set<Break> attendedBreaks) {
+		this.attendedBreaks = attendedBreaks;
+	}
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
