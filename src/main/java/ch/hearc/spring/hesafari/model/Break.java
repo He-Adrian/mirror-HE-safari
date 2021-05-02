@@ -47,8 +47,8 @@ public class Break {
 	@ManyToOne
 	private User owner;
 
-	@ManyToMany(mappedBy = "attendedBreaks", fetch = FetchType.EAGER)
-	Set<User> attends = Collections.emptySet();
+//	@ManyToMany(mappedBy = "attendedBreaks", fetch = FetchType.EAGER)
+//	Set<User> attends = Collections.emptySet();
 
 	public Break() {
 		///
