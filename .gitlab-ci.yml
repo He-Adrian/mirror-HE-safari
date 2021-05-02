@@ -59,8 +59,8 @@ sonarqube:
   stage: sonarqube
   script:
     - echo "start sonarqube"
+    - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
     - echo "sonarqube ok"
-    #- mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
   only:
     - master
   tags:
