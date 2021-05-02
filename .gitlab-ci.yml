@@ -76,8 +76,8 @@ deploy_ssh:
     - pwd
     - export DOCKER_HOST="unix:///var/run/docker.sock"
     - echo $DOCKER_HOST
-    - docker-compose down --rmi all
-    - docker-compose up -d --build
+    #- docker-compose down --rmi all
+    #- docker-compose up -d --build
     - echo "deploy ok"
   only:
     - master
