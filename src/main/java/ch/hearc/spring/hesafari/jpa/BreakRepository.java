@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
+import org.springframework.stereotype.Repository;
 
 import ch.hearc.spring.hesafari.model.Break;
 
@@ -19,6 +20,7 @@ import ch.hearc.spring.hesafari.model.Break;
 //	}
 //}
 
+@Repository
 public interface BreakRepository extends JpaRepository<Long,Long> {
 	// this a dynamic request so we cannot use @query annotation
 	}
