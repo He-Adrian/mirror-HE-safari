@@ -122,7 +122,7 @@ public class BreakController {
 			User user = (User) principal;
 
 			// Set Owner
-			newBreak.setOwner(user);
+//			newBreak.setOwner(user);
 
 //			breakRepo.save(newBreak);
 

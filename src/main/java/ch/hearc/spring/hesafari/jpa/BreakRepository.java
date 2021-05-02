@@ -13,7 +13,6 @@ import ch.hearc.spring.hesafari.model.Break;
 
 public interface BreakRepository extends JpaRepository<Break, Long> {
 // this a dynamic request so we cannot use @query annotation
-	@Autowired
 	public default List<Break> findAllByLocation(String location) {
 		return this.findAll().stream().filter(b -> b.getLocation().toUpperCase().contains(location.toUpperCase()))
 				.collect(Collectors.toList());
