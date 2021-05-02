@@ -75,7 +75,7 @@ deploy_ssh:
     - echo "deploy apps"
     - pwd
     - ls
-    - sudo docker-compose down --rmi all
+    - docker-compose down --rmi all
     - docker-compose up -d --build
     - echo "deploy ok"
   only:
