@@ -13,9 +13,7 @@ services:
       - db-data:/var/lib/mysql
     networks:
       - backend
-    ports:
-      - 3307:3306  
-
+      
   adminer:
     image: adminer
     restart: always
