@@ -39,10 +39,10 @@ import ch.hearc.spring.hesafari.model.User;
 public class BreakController {
 
 	// Bean injection
-	@Autowired
+//	@Autowired
 	private BreakRepository breakRepo;
 
-	@Autowired
+//	@Autowired
 	private UserRepository userRepository;
 
 	// Retrieve home.title from application.properties.

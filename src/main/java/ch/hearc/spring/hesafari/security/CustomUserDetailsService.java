@@ -10,7 +10,7 @@ import ch.hearc.spring.hesafari.model.User;
  
 public class CustomUserDetailsService implements UserDetailsService {
  
-    @Autowired
+//    @Autowired
     private UserRepository userRepo;
      
     @Override

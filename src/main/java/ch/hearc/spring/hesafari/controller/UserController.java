@@ -23,10 +23,10 @@ import ch.hearc.spring.hesafari.model.User;
 @Controller
 public class UserController {
 
-	@Autowired
+//	@Autowired
 	private UserRepository userRepository;
 
-	@Autowired
+//	@Autowired
 	private BreakRepository breakRepo;
 
 	@Autowired
