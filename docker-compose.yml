@@ -6,8 +6,8 @@ services:
     restart: always
     environment:
       MYSQL_DATABASE: HESAFARI
-      #MYSQL_USER: root
-      #MYSQL_PASSWORD: toor
+      MYSQL_USER: root
+      MYSQL_PASSWORD: toor
       MYSQL_ROOT_PASSWORD: toor
     volumes:
       - db-data:/var/lib/mysql
