@@ -6,6 +6,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.factory.PasswordEncoderFactories;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.authentication.AuthenticationFailureHandler;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 import javax.sql.DataSource;
 
@@ -52,9 +53,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 	@Override
 	protected void configure(final HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests().anyRequest().permitAll().and().formLogin().loginPage("/user/login")
+		http.authorizeRequests().anyRequest().permitAll().and().formLogin().loginPage("/user/login")
 				.usernameParameter("username").defaultSuccessUrl("/").permitAll().and().logout()
-				.logoutUrl("/user/logout").permitAll();
+				.logoutRequestMatcher(new AntPathRequestMatcher("/user/logout"));
+//				.logoutUrl("/user/logout").permitAll();
 
 	}
 }
