@@ -62,7 +62,7 @@ public class BreakController {
 	 * @RequestMapping(value = "/", method = {RequestMethod.GET,
 	 *                       RequestMethod.POST})
 	 */
-	@RequestMapping(value = "/", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/", method = { RequestMethod.GET })
 	public String home(@RequestParam Optional<String> search, Map<String, Object> model) {
 
 		// Send title retrieved from application.properties
@@ -168,7 +168,7 @@ public class BreakController {
 		}
 	}
 
-	@RequestMapping(value = "/break", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/break", method = { RequestMethod.GET })
 	public String breakUsers(Map<String, Object> model, @RequestParam String id) {
 
 		Optional<Break> b = breakRepo.findById(Long.parseLong(id));

@@ -32,12 +32,12 @@ public class UserController {
 	@Autowired
 	private PasswordEncoder passwordEncoder;
 
-	@RequestMapping(value = "/user/login", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/user/login", method = { RequestMethod.GET })
 	public String login(Map<String, Object> model) {
 		return "login";
 	}
 
-	@RequestMapping(value = "/user/signup", method = { RequestMethod.GET, RequestMethod.POST })
+	@RequestMapping(value = "/user/signup", method = { RequestMethod.GET })
 	public String signup(Map<String, Object> model) {
 		model.put("user", new User());
 
