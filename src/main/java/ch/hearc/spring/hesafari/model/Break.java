@@ -44,8 +44,8 @@ public class Break {
 	@Column(unique = true, nullable = false, length = 100)
 	private String description;
 
-	@ManyToOne
-	private User owner;
+//	@ManyToOne
+//	private User owner;
 
 //	@ManyToMany(mappedBy = "attendedBreaks", fetch = FetchType.EAGER)
 //	Set<User> attends = Collections.emptySet();

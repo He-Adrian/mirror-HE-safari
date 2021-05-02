@@ -37,8 +37,8 @@ public class User implements UserDetails {
 	@Column(name = "reputation", nullable = false, length = 20)
 	private int reputation = 0;
 
-	@OneToMany(targetEntity = Break.class, fetch = FetchType.EAGER)
-	private List<Break> ownedBreaks = Collections.emptyList();
+//	@OneToMany(targetEntity = Break.class, fetch = FetchType.EAGER)
+//	private List<Break> ownedBreaks = Collections.emptyList();
 
 //	@ManyToMany(fetch = FetchType.EAGER)
 //	@JoinTable(name = "break_attend", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "break_id"))
