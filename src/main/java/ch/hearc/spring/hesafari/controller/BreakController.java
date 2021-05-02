@@ -40,10 +40,10 @@ public class BreakController {
 
 	// Bean injection
 //	@Autowired
-	private BreakRepository breakRepo;
+//	private BreakRepository breakRepo;
 
 //	@Autowired
-	private UserRepository userRepository;
+//	private UserRepository userRepository;
 
 	// Retrieve home.title from application.properties.
 	@Value("${home.title:Default title}")
@@ -70,11 +70,11 @@ public class BreakController {
 
 		if (search.isEmpty()) {
 			// Put the todo list from the DAO
-			model.put("breaks", breakRepo.findAll());
+//			model.put("breaks", breakRepo.findAll());
 			model.put("searched", "");
 		} else {
 			System.out.println(search);
-			model.put("breaks", breakRepo.findAllByLocation(search.get()));
+//			model.put("breaks", breakRepo.findAllByLocation(search.get()));
 			model.put("searched", search.get());
 		}
 
@@ -124,7 +124,7 @@ public class BreakController {
 			// Set Owner
 			newBreak.setOwner(user);
 
-			breakRepo.save(newBreak);
+//			breakRepo.save(newBreak);
 
 			redirAttrs.addFlashAttribute("breakCreated", true);
 
@@ -134,53 +134,53 @@ public class BreakController {
 			return "redirect:/user/login";
 		}
 	}
-
-	@GetMapping("/attend")
-	public String attendTo(@RequestParam String id, RedirectAttributes redirAttrs) {
-		// Find the break
-		Optional<Break> b = breakRepo.findById(Long.parseLong(id));
-
-		if (b.isEmpty()) {
-			return "redirect:/";
-		} else {
-			// Get current user
-			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-
-			if (principal instanceof User) {
-				User user = (User) principal;
-
-				// Add the break to the user
+//
+//	@GetMapping("/attend")
+//	public String attendTo(@RequestParam String id, RedirectAttributes redirAttrs) {
+//		// Find the break
+//		Optional<Break> b = breakRepo.findById(Long.parseLong(id));
+//
+//		if (b.isEmpty()) {
+//			return "redirect:/";
+//		} else {
+//			// Get current user
+//			Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+//
+//			if (principal instanceof User) {
+//				User user = (User) principal;
+//
+//				// Add the break to the user
 //				user.getAttendedBreaks().add(b.get());
+//
+//				// Increment reputation
+//				b.get().getOwner().setReputation(b.get().getOwner().getReputation() + 1);
+//
+//				userRepository.save(user);
+//				userRepository.save(b.get().getOwner());
+//
+//				redirAttrs.addFlashAttribute("breakAttended", true);
+//
+//				return "redirect:/";
+//
+//			} else {
+//				return "redirect:/user/login";
+//			}
+//		}
+//	}
 
-				// Increment reputation
-				b.get().getOwner().setReputation(b.get().getOwner().getReputation() + 1);
-
-				userRepository.save(user);
-				userRepository.save(b.get().getOwner());
-
-				redirAttrs.addFlashAttribute("breakAttended", true);
-
-				return "redirect:/";
-
-			} else {
-				return "redirect:/user/login";
-			}
-		}
-	}
-
-	@RequestMapping(value = "/break", method = { RequestMethod.GET, RequestMethod.POST })
-	public String breakUsers(Map<String, Object> model, @RequestParam String id) {
-
-		Optional<Break> b = breakRepo.findById(Long.parseLong(id));
-
-		if (b.isEmpty()) {
-			return "redirect:/";
-		} else {
-			model.put("break", b.get());
-
-			// Return the page "break_users.html"
-			return "break_users";
-		}
-	}
+//	@RequestMapping(value = "/break", method = { RequestMethod.GET, RequestMethod.POST })
+//	public String breakUsers(Map<String, Object> model, @RequestParam String id) {
+//
+////		Optional<Break> b = breakRepo.findById(Long.parseLong(id));
+//
+//		if (b.isEmpty()) {
+//			return "redirect:/";
+//		} else {
+//			model.put("break", b.get());
+//
+//			// Return the page "break_users.html"
+//			return "break_users";
+//		}
+//	}
 
 }

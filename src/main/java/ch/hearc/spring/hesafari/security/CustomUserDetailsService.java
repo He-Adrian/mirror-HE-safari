@@ -9,17 +9,19 @@ import ch.hearc.spring.hesafari.jpa.UserRepository;
 import ch.hearc.spring.hesafari.model.User;
  
 public class CustomUserDetailsService implements UserDetailsService {
+
  
 //    @Autowired
-    private UserRepository userRepo;
+//    private UserRepository userRepo;
      
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        User user = userRepo.findByUsername(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found");
-        }
-        return user;
+//        User user = userRepo.findByUsername(username);
+//        if (user == null) {
+//            throw new UsernameNotFoundException("User not found");
+//        }
+//        return user;
+    	return null;
     }
  
 }
