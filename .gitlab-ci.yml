@@ -8,7 +8,7 @@ variables:
 stages:
   - build
   - test
-  - sonarqube
+  - sonarcloud
   - deploy
 
 
@@ -30,7 +30,8 @@ build:
   only:
     - master
   tags:
-    - HESAFARI-RUNNER
+    #- HESAFARI-RUNNER
+    - alpin-docker
 
 unittest:
   image: maven:latest
@@ -42,7 +43,8 @@ unittest:
   only:
     - master
   tags:
-    - HESAFARI-RUNNER
+    #- HESAFARI-RUNNER
+    - alpin-docker
 
 katalon_test_suite:
   stage: test
@@ -52,20 +54,22 @@ katalon_test_suite:
   only:
     - master
   tags:
-    - HESAFARI-RUNNER
+    #- HESAFARI-RUNNER
+    - alpin-docker
     
 
-sonarqube:
+sonarcloud:
   image: maven:latest
-  stage: sonarqube
+  stage: sonarcloud
   script:
-    - echo "start sonarqube"
+    - echo "start sonarcloud"
     - mvn verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar
-    - echo "sonarqube ok"
+    - echo "sonarcloud ok"
   only:
     - master
   tags:
-    - HESAFARI-RUNNER
+    #- HESAFARI-RUNNER
+    - alpin-docker
 
 
 deploy_ssh:
